@@ -2,6 +2,8 @@ require("bundler/setup")
 Bundler.require(:default)
 Dir[File.dirname(__FILE__) + '/lib/*.rb'].each { |file| require file}
 
+Resource.new({name: "water", cost: 1.79, increment: true})
+
 get('/') do
   @users = User.all()
   erb(:index)
@@ -14,6 +16,7 @@ end
 
 get('/users/:id') do
   @user = User.find(params['id'])
+  @inventory = Resource.all()
   erb(:user)
 end
 
