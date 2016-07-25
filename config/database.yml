@@ -1,0 +1,7 @@
+development:
+  adapter: postgresql
+  database: apocalypse_development
+
+test:
+  adapter: postgresql
+  database: apocalypse_test
