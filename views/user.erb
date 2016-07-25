@@ -1,0 +1,44 @@
+<div class="container row">
+  <div class="col-xs-12">
+<h1><%= @user.name %> </h1>
+
+<h3>Your current resources:</h3>
+
+<h4> Money: $<%= @user.money %> </h4>
+
+
+  </div>
+</div>
+
+<div class="container row">
+  <div class="col-xs-6">
+    <h2>Current Items:</h2>
+      <% if @inventory %>
+        <% @inventory.each do |item| %>
+          <div class="well">
+            <h4><%= item.name %> - <%= item.cost %></h4>
+          </div>
+        <% end %>
+      <% end %>
+  </div>
+</div>
+
+<div class="container row">
+  <div class="col-xs-6">
+    <h2>Available Items:</h2>
+    <% if @inventory %>
+      <% @inventory.each do |item| %>
+        <div class="well">
+          <h4><%= item.name %> - <%= item.cost %></h4>
+          <form class="" action="/users/<%= @user.id %>/resources/<%= item.id %>" method="post">
+            <input name="_method" type="hidden" value="delete">
+            <button class="btn btn-danger btn-sm" type="submit">Delete</button>
+          </form>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+<hr>
+<a href="/" class="btn btn-default active" role="button">Home</a>
