@@ -2,7 +2,7 @@ require("bundler/setup")
 Bundler.require(:default)
 Dir[File.dirname(__FILE__) + '/lib/*.rb'].each { |file| require file}
 
-Resource.new({name: "water", cost: 1.79, increment: true})
+Resource.populate_items()
 
 get('/') do
   @users = User.all()
@@ -24,4 +24,10 @@ delete('/users/:id') do
   user = User.find(params['id'])
   user.destroy()
   redirect('/')
+end
+
+delete('/users/:user_id/resources/:resource_id') do
+  item = Resource.find(params['resource_id'])
+  item.destroy()
+  redirect('/users/' + params['user_id'])
 end
