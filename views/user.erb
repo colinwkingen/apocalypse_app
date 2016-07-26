@@ -44,7 +44,7 @@
     <% if @inventory %>
       <% @inventory.each do |item| %>
         <div class="well">
-          <h4><%= item.name %> - <%= item.cost %></h4>
+          <h4><%= item.name %> - <%= item.cost %> - <%= item.type %></h4>
           <form class="" action="/users/<%= @user.id %>/resources/<%= item.id %>" method="post">
             <input name="_method" type="hidden" value="delete">
             <button class="btn btn-danger btn-sm" type="submit">Delete</button>
