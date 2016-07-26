@@ -15,7 +15,7 @@
         <% @inventory.order("id DESC").each do |item| %>
           <div class="well row">
             <div class="col-xs-6">
-              <h4><%= item.name %> - <%= item.cost %></h4>
+              <h4><%= item.name %> - <%= item.cost %> - <%= item.item_type %> - <%= item.value %></h4>
             </div>
             <div class="col-xs-6">
               <div class="well">
