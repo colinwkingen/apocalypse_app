@@ -22,14 +22,21 @@
             <div class="col-xs-6">
               <div class="well">
                 <% if item.incrementable == true %>
-                  <form class="" action="user/<%= @user.id %>/resource/<%= item.id %>/increment" method="post">
-                    <button class="btn btn-sm" type="submit"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span></button>
+                  <form class="" action="/users/<%= @user.id %>/resource/<%= item.id %>/increment" method="post">
+                    <input name="_method" type="hidden" value="patch">
+                    <button class="btn btn-sm" type="submit" value="up" id="up_button">
+                      <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+                    </button>
                   </form>
-                  <form class="" action="user/<%= @user.id %>/resource/<%= item.id %>/increment" method="post">
+                  <form class="" action="/users/<%= @user.id %>/resource/<%= item.id %>/increment" method="post">
                     <button class="btn btn-sm" type="submit"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span></button>
                   </form>
-                  <%= item.amounts.quantity %>
+                  <% amount =  Amount.find_by(user_id: @user.id, resource_id: item.id) %>
+                  <% if amount %>
+                    <h4> Quantity: <%= amount.quantity %> </h4>
+                  <% end %>
                 <% end %>
+
               </div>
             </div>
           </div>
@@ -41,13 +48,16 @@
 <div class="container row">
   <div class="col-xs-6">
     <h2>Available Items:</h2>
-    <% if @inventory %>
-      <% @inventory.each do |item| %>
+    <% if @resources %>
+      <% @resources.each do |resource| %>
         <div class="well">
-          <h4><%= item.name %> - <%= item.cost %></h4>
-          <form class="" action="/users/<%= @user.id %>/resources/<%= item.id %>" method="post">
+          <h4><%= resource.name %> - <%= resource.cost %> - <%= resource.unit %></h4>
+          <form class="" action="/users/<%= @user.id %>/resources/<%= resource.id %>" method="post">
             <input name="_method" type="hidden" value="delete">
             <button class="btn btn-danger btn-sm" type="submit">Delete</button>
+          </form>
+          <form class='' action="/users/<%= @user.id %>/resources/<%=resource.id%>" method="post">
+            <button class="btn btn-primary btn-sm" type="submit">Buy</button>
           </form>
         </div>
       <% end %>

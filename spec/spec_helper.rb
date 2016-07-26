@@ -21,8 +21,8 @@ RSpec.configure do |config|
     User.all().each() do |user|
       user.destroy()
     end
-    Scenario.all().each() do |scenario|
-      scenario.destroy()
+    Disaster.all().each() do |disaster|
+      disaster.destroy()
     end
   end
 end
