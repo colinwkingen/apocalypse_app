@@ -1,8 +1,21 @@
-<div class="container row">
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Recipe for Survival</title>
+    <script   src="https://code.jquery.com/jquery-2.2.4.js"   integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="   crossorigin="anonymous"></script>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <div class="container">
+      <div class="page-header">
+        <h1>Recipe for Survival</h1>
+      </div>
+      <div class="container row">
   <div class="col-xs-12">
-<h1><%= @user.name %> </h1>
+<h1>Mike </h1>
 <hr>
-<h4> Money to spend: $<%= @user.money %> </h4>
+<h4> Money to spend: $1007.25 </h4>
 
 
   </div>
@@ -11,57 +24,61 @@
 <div class="container row">
   <div class="col-xs-6">
     <h2>Current Items:</h2>
-      <% if @inventory %>
-        <% @inventory.order("id DESC").each do |item| %>
+      
+        
           <div class="well row">
             <div class="col-xs-6">
-              <h4><%= item.name %> - <%= item.cost %></h4>
+              <h4>Beans - 1.29</h4>
             </div>
             <div class="col-xs-6">
-              <% if item.incrementable == true %>
-                <div class="well">
-                  <form class="" action="/users/<%= @user.id %>/resources/<%= item.id %>/increment" method="post">
+              <div class="well">
+                
+                  <form class="" action="/users/31/resources/167/increment" method="post">
                     <input name="_method" type="hidden" value="patch">
                     <button class="btn btn-sm" type="submit" value="up" id="up_button">
                       <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
                     </button>
                   </form>
-                  <form class="" action="/users/<%= @user.id %>/resources/<%= item.id %>/decrement" method="post">
+                  <form class="" action="/users/31/resources/167/decrement" method="post">
                     <input name="_method" type="hidden" value="patch">
                     <button class="btn btn-sm" type="submit" id="down_button">
                       <span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>
                     </button>
                   </form>
-                  <% amount =  Amount.find_by(user_id: @user.id, resource_id: item.id) %>
-                  <% if amount %>
-                    <h4> Quantity: <%= amount.quantity %> </h4>
-                  <% end %>
-                </div>
-              <% end %>
+                  
+                  
+                    <h4> Quantity: 1 </h4>
+                  
+                
+              </div>
             </div>
           </div>
-        <% end %>
-      <% end %>
+        
+      
   </div>
   <div class="col-xs-6">
     <h2>Available Items:</h2>
-    <% if @resources %>
-      <% @resources.order("id DESC").each do |resource| %>
+    
+      
         <div class="well">
-          <h4><%= resource.name %> - <%= resource.cost %> - <%= resource.unit %></h4>
-          <form class="" action="/users/<%= @user.id %>/resources/<%= resource.id %>" method="post">
+          <h4>Beans - 1.29 - Can</h4>
+          <form class="" action="/users/31/resources/167" method="post">
             <input name="_method" type="hidden" value="delete">
             <button class="btn btn-danger btn-sm" type="submit">Delete</button>
           </form>
-          <form class='' action="/users/<%= @user.id %>/resources/<%=resource.id%>" method="post">
+          <form class='' action="/users/31/resources/167" method="post">
             <button class="btn btn-primary btn-sm" type="submit">Buy</button>
           </form>
         </div>
-      <% end %>
-    <% end %>
+      
+    
   </div>
 </div>
 
 
 <hr>
 <a href="/" class="btn btn-default active" role="button">Home</a>
+
+    </div>
+  </body>
+</html>
