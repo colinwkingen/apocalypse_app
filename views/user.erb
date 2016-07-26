@@ -15,7 +15,7 @@
         <% @inventory.order("id DESC").each do |item| %>
           <div class="well row">
             <div class="col-xs-6">
-              <h4><%= item.name %> - <%= item.cost %></h4>
+              <h4><%= item.name %> - <%= item.cost %> - <%= item.item_type %> - <%= item.value %></h4>
             </div>
             <div class="col-xs-6">
               <% if item.incrementable == true %>
@@ -49,6 +49,7 @@
       <% @resources.order("id DESC").each do |resource| %>
         <div class="well">
           <h4><%= resource.name %> - <%= resource.cost %> - <%= resource.unit %></h4>
+          <p><%= resource.blurb %></p>
           <form class="" action="/users/<%= @user.id %>/resources/<%= resource.id %>" method="post">
             <input name="_method" type="hidden" value="delete">
             <button class="btn btn-danger btn-sm" type="submit">Delete</button>
