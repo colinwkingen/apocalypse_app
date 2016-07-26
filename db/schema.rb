@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160725223838) do
+ActiveRecord::Schema.define(version: 20160726211206) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,8 @@ ActiveRecord::Schema.define(version: 20160725223838) do
     t.float   "cost"
     t.boolean "incrementable"
     t.string  "unit"
+    t.string  "item_type"
+    t.integer "value"
   end
 
   create_table "users", force: :cascade do |t|
@@ -37,6 +39,11 @@ ActiveRecord::Schema.define(version: 20160725223838) do
     t.float   "money"
     t.integer "high_score"
     t.string  "scenario_name"
+    t.integer "food_count"
+    t.integer "water_count"
+    t.integer "medicine_count"
+    t.integer "protection_count"
+    t.boolean "alive"
   end
 
 end
