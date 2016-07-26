@@ -9,7 +9,7 @@ get('/') do
 erb(:index)
 end
 
-patch('user/:user_id/resource/:resource_id/increment/') do
+patch('/users/:user_id/resource/:resource_id/increment') do
   user = User.find(params['user_id'].to_i)
   resource = Resource.find(params['resource_id'].to_i)
   if amount = Amount.find_by(user_id: user.id, resource_id: resource.id)
@@ -26,10 +26,10 @@ patch('user/:user_id/resource/:resource_id/increment/') do
       @money_message = "Money levels too low for purchase, current money:" + user.money.to_s
     end
   end
-  redirect('')
+  redirect('/users/' + user.id.to_s)
 end
 
-patch('user/:user_id/resource/:resource_id/decrement') do
+patch('/users/:user_id/resource/:resource_id/decrement') do
   user = User.find(params['user_id'].to_i)
   resource = User.find(params['resource_id'].to_i)
   if amount = Amount.find_by(user_id: user.id, resource_id: resource.id)
@@ -51,7 +51,8 @@ end
 
 get('/users/:id') do
   @user = User.find(params['id'])
-  @inventory = Resource.all()
+  @resources = Resource.all()
+  @inventory = @user.resources
   erb(:user)
 end
 
