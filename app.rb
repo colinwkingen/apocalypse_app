@@ -67,10 +67,9 @@ delete('/users/:user_id/resources/:resource_id') do
   redirect('/users/' + params['user_id'])
 end
 
-post('/user/:user_id/resources/:resource_id') do
+post('/users/:user_id/resources/:resource_id') do
   item = Resource.find(params['resource_id'])
   user = User.find(params['user_id'])
-  new_amount = Amount.create({:user_id => user.id, :resource_id => item.id, :quantity => 1, :unit => item.unit})
-  user.amounts.push(new_amount)
-  redirect('')
+  new_amount = Amount.create({:user_id => user.id, :resource_id => item.id, :quantity => 1})
+  redirect('/users/' + user.id.to_s)
 end

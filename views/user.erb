@@ -28,6 +28,10 @@
                   <form class="" action="user/<%= @user.id %>/resource/<%= item.id %>/increment" method="post">
                     <button class="btn btn-sm" type="submit"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span></button>
                   </form>
+                  <% amount =  Amount.find_by(user_id: @user.id, resource_id: item.id) %>
+                  <% if amount %>
+                    <h4> Quantity: <%= amount.quantity %> </h4>
+                  <% end %>
                 <% end %>
 
               </div>
