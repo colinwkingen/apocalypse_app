@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   has_many :amounts
   has_many :resources, through: :amounts
-  before_save(:set_money)
+  before_create(:set_money)
 
 private
   define_method(:set_money) do

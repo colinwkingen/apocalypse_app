@@ -9,7 +9,7 @@ get('/') do
 erb(:index)
 end
 
-patch('user/:user_id/resource/:resource_id/increment/') do
+patch('/users/:user_id/resources/:resource_id/increment') do
   user = User.find(params['user_id'].to_i)
   resource = Resource.find(params['resource_id'].to_i)
   if amount = Amount.find_by(user_id: user.id, resource_id: resource.id)
@@ -21,19 +21,19 @@ patch('user/:user_id/resource/:resource_id/increment/') do
     end
   else
     if user.money >= resource.cost
-      Amount.create({:user_id => user.id, :resource_id => resource_obj.id, :quantity => 1, :unit => resource_obj.unit})
+      Amount.create({:user_id => user.id, :resource_id => resource.id, :quantity => 1})
     else
       @money_message = "Money levels too low for purchase, current money:" + user.money.to_s
     end
   end
-  redirect('')
+  redirect('/users/' + user.id.to_s)
 end
 
-patch('user/:user_id/resource/:resource_id/decrement') do
+patch('/users/:user_id/resources/:resource_id/decrement') do
   user = User.find(params['user_id'].to_i)
-  resource = User.find(params['resource_id'].to_i)
+  resource = Resource.find(params['resource_id'].to_i)
   if amount = Amount.find_by(user_id: user.id, resource_id: resource.id)
-    if amount.quantity > 0
+    if amount.quantity > 1
       amount.update({:quantity => (amount.quantity - 1)})
       user.update({:money => (user.money + resource.cost)})
     else
@@ -41,7 +41,7 @@ patch('user/:user_id/resource/:resource_id/decrement') do
       user.update({:money => (user.money + resource.cost)})
     end
   end
-  redirect('')
+  redirect('/users/' + user.id.to_s)
 end
 
 post('/new_user') do
@@ -51,7 +51,8 @@ end
 
 get('/users/:id') do
   @user = User.find(params['id'])
-  @inventory = Resource.all()
+  @resources = Resource.all()
+  @inventory = @user.resources
   erb(:user)
 end
 
@@ -65,4 +66,12 @@ delete('/users/:user_id/resources/:resource_id') do
   item = Resource.find(params['resource_id'])
   item.destroy()
   redirect('/users/' + params['user_id'])
+end
+
+post('/users/:user_id/resources/:resource_id') do
+  item = Resource.find(params['resource_id'])
+  user = User.find(params['user_id'])
+  new_amount = Amount.create({:user_id => user.id, :resource_id => item.id, :quantity => 1})
+  user.update({:money => (user.money - item.cost)})
+  redirect('/users/' + user.id.to_s)
 end
