@@ -7,11 +7,11 @@ Resource.populate_items()
 get('/') do
   @users = User.all()
 erb(:index)
+end
 
-
-patch('/resource/:id/increment') do
+patch('user/:user_id/resource/:resource_id/increment/') do
   user = User.find(params['user_id'].to_i)
-  resource = Resource.find(params['id'].to_i)
+  resource = Resource.find(params['resource_id'].to_i)
   if amount = Amount.find_by(user_id: user.id, resource_id: resource.id)
     if user.money >= resource.cost
       amount.update({:quantity => (amount.quantity + 1)})
@@ -25,12 +25,13 @@ patch('/resource/:id/increment') do
     else
       @money_message = "Money levels too low for purchase, current money:" + user.money.to_s
     end
+  end
   redirect('')
 end
 
-patch('/resource/:id/decrement') do
+patch('user/:user_id/resource/:resource_id/decrement') do
   user = User.find(params['user_id'].to_i)
-  resource = User.find(params['id'].to_i)
+  resource = User.find(params['resource_id'].to_i)
   if amount = Amount.find_by(user_id: user.id, resource_id: resource.id)
     if amount.quantity > 0
       amount.update({:quantity => (amount.quantity - 1)})

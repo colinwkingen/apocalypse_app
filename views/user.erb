@@ -15,8 +15,23 @@
     <h2>Current Items:</h2>
       <% if @inventory %>
         <% @inventory.each do |item| %>
-          <div class="well">
-            <h4><%= item.name %> - <%= item.cost %></h4>
+          <div class="well row">
+            <div class="col-xs-6">
+              <h4><%= item.name %> - <%= item.cost %></h4>
+            </div>
+            <div class="col-xs-6">
+              <div class="well">
+                <% if item.incrementable == true %>
+                  <form class="" action="user/<%= @user.id %>/resource/<%= item.id %>/increment" method="post">
+                    <button class="btn btn-sm" type="submit"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span></button>
+                  </form>
+                  <form class="" action="user/<%= @user.id %>/resource/<%= item.id %>/increment" method="post">
+                    <button class="btn btn-sm" type="submit"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span></button>
+                  </form>
+                  <%= item.amounts.quantity %>
+                <% end %>
+              </div>
+            </div>
           </div>
         <% end %>
       <% end %>
