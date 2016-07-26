@@ -21,7 +21,7 @@ patch('user/:user_id/resource/:resource_id/increment/') do
     end
   else
     if user.money >= resource.cost
-      Amount.create({:user_id => user.id, :resource_id => resource_obj.id, :quantity => 1, :unit => resource_obj.unit})
+      Amount.create({:user_id => user.id, :resource_id => resource.id, :quantity => 1})
     else
       @money_message = "Money levels too low for purchase, current money:" + user.money.to_s
     end
@@ -65,4 +65,12 @@ delete('/users/:user_id/resources/:resource_id') do
   item = Resource.find(params['resource_id'])
   item.destroy()
   redirect('/users/' + params['user_id'])
+end
+
+post('/user/:user_id/resources/:resource_id') do
+  item = Resource.find(params['resource_id'])
+  user = User.find(params['user_id'])
+  new_amount = Amount.create({:user_id => user.id, :resource_id => item.id, :quantity => 1, :unit => item.unit})
+  user.amounts.push(new_amount)
+  redirect('')
 end
