@@ -16,8 +16,13 @@ class Disaster < ActiveRecord::Base
         user.update({medicine_count: (medicine_current - 7)})
         user.update({protection_count: (protection_current - 7)})
       end
-      if self.life_jacket?(user) && self.name == 'Earthquake'
-        user.update({alive: false})
+      if rand(4) > 2
+        if self.hard_hat?(user) && self.name == 'Earthquake'
+          user.update({alive: false})
+          messages.concat("You have met your end due to falling debri!")
+        else
+          messages.concat("You have come in contact with falling debri, wise choice to have a hard hat!")
+        end
       end
     end
     if self.name == 'Contagion'
@@ -94,21 +99,16 @@ class Disaster < ActiveRecord::Base
     chance_of_radiation
   end
 
-  define_method(:life_jacket?) do |user|
+  define_method(:hard_hat?) do |user|
     resource_names = []
-    chance_of_drowning = false
+    chance_of_debri = false
     user.resources.each() do |resource|
       resource_names.push(resource.name)
     end
-    if resource_names.include?("Life Jacket")
-      if rand(20) > 18
-        chance_of_drowning = true
-      end
-    else
-      if rand(20) > 9
-        chance_of_drowning = true
-      end
+    unless resource_names.include?("Hard Hat")
+      chance_of_debri = true
     end
-    chance_of_drowning
+    chance_of_debri
   end
+
 end
