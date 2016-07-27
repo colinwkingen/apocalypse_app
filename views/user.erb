@@ -19,7 +19,7 @@
   <% @disasters.each do |disaster| %>
     <li class="list-group-item"> <a href="/users/<%=@user.id%>/disasters/<%=disaster.id%>"> <%= disaster.name %> </a>
   <% end %>
-  
+
   </div>
 </div>
 
@@ -51,13 +51,15 @@
                   <% if amount %>
                     <h4> Quantity: <%= amount.quantity %> </h4>
                   <% end %>
-                <% else %>
+                </div>
+              <% else %>
+                <div class="well">
                   <form class="" action="/users/<%= @user.id %>/resources/<%= item.id %>/remove" method="post">
                     <input name="_method" type="hidden" value="patch">
                     <button class="btn btn-danger btn-sm" type="submit">Delete</button>
                   </form>
-                <% end %>
-              </div>
+                </div>
+              <% end %>
             </div>
           </div>
         <% end %>
