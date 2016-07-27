@@ -119,7 +119,9 @@ post('/users/:user_id/disasters/:disaster_id/:counter_id') do
   if @user.alive == true
     @disaster.every_day(@user)
     @counter += 1
+    @message_arry = @disaster.message.split('!')
+  else
+    @message_arry = @disaster.message.split('!')
   end
-  @message_arry = @disaster.message.split('!')
   erb(:disaster)
 end

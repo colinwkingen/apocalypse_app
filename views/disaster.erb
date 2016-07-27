@@ -1,5 +1,10 @@
 <h2> <%= @user.name %>, you are trying to survive in a <%= @disaster.name %></h2>
+
 <h3> Day <%= @counter %> </h3>
+
+<% if @user.alive == false %>
+  <h2>You died on day <%= @counter %> </h2>
+<% end %>
 
 <label for="new_user">Play out a day:</label>
 <form name="new_user" action="/users/<%=@user.id%>/disasters/<%=@disaster.id%>/<%=@counter%>" method="post">
@@ -15,6 +20,7 @@
 <% end %>
 
 
-<% if @user.alive == false %>
-  <h2>You died on day <%= @counter %> </h2>
-<% end %>
+
+
+<hr>
+<a class = "btn btn-primary" href="/users/<%=@user.id%>">Back to Store</a>

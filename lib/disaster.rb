@@ -15,7 +15,9 @@ class Disaster < ActiveRecord::Base
       if rand(3) > 1
         user.update({medicine_count: (medicine_current - 3)})
         user.update({protection_count: (protection_current - 3)})
+        messages.concat("You fell down a cliff and broke your leg. Bummer; had to use a bunch of your medicine!")
       end
+      # self.update({message: messages})
     end
     if self.name == 'Contagion'
       user.update({food_count: (food_current - 12)})
@@ -23,6 +25,7 @@ class Disaster < ActiveRecord::Base
       if rand(3) > 1
         user.update({medicine_count: (medicine_current - 6)})
         user.update({protection_count: (protection_current - 6)})
+        messages.concat("Today you were exposed to the superflu. You had to use a bunch of your medicine!")
       end
       if rand(4) > 2
         if self.gas_mask?(user) && self.name == 'Contagion'
@@ -32,6 +35,7 @@ class Disaster < ActiveRecord::Base
           messages.concat("You have come in contact with the contagion, wise choice to have a gas mask!")
         end
       end
+      # self.update({message: messages})
     end
     if self.name == 'Nuclear'
       user.update({food_count: (food_current - 12)})
@@ -39,6 +43,7 @@ class Disaster < ActiveRecord::Base
       if rand(3) > 1
         user.update({medicine_count: (medicine_current - 6)})
         user.update({protection_count: (protection_current - 9)})
+        messages.concat("Some radiation is seeping into your house; running out of medicine!")
       end
       if rand(4) > 2
         if self.hazmat_suit?(user) && self.name == 'Nuclear'
@@ -48,6 +53,7 @@ class Disaster < ActiveRecord::Base
           messages.concat("You have come in contact with radioactive fallout, wise choice to have a hazmat suit!")
         end
       end
+      # self.update({message: messages})
     end
     if user.food_count.to_i < 0
       user.update({alive: false})
