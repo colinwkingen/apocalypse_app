@@ -1,7 +1,7 @@
 class Disaster < ActiveRecord::Base
 
   define_method(:every_day) do |user|
-    message = ''
+    messages = ''
     if user.alive == false
       break
     end
@@ -10,8 +10,8 @@ class Disaster < ActiveRecord::Base
     medicine_current = user.medicine_count.to_i
     protection_current = user.protection_count.to_i
     if self.name == 'Earthquake'
-      user.update({food_count: (food_current - 9)})
-      user.update({water_count: (water_current - 12)})
+      user.update({food_count: (food_current - 12)})
+      user.update({water_count: (water_current - 3)})
       if rand(3) > 1
         user.update({medicine_count: (medicine_current - 3)})
         user.update({protection_count: (protection_current - 3)})
@@ -19,7 +19,7 @@ class Disaster < ActiveRecord::Base
     end
     if self.name == 'Contagion'
       user.update({food_count: (food_current - 12)})
-      user.update({water_count: (water_current - 12)})
+      user.update({water_count: (water_current - 3)})
       if rand(3) > 1
         user.update({medicine_count: (medicine_current - 6)})
         user.update({protection_count: (protection_current - 6)})
@@ -35,7 +35,7 @@ class Disaster < ActiveRecord::Base
     end
     if self.name == 'Nuclear'
       user.update({food_count: (food_current - 12)})
-      user.update({water_count: (water_current - 15)})
+      user.update({water_count: (water_current - 3)})
       if rand(3) > 1
         user.update({medicine_count: (medicine_current - 6)})
         user.update({protection_count: (protection_current - 9)})
@@ -64,6 +64,7 @@ class Disaster < ActiveRecord::Base
     else
       user.update({high_score: (user.high_score.to_i + 10)})
     end
+    self.update({message: messages})
   end
 
   define_method(:gas_mask?) do |user|
