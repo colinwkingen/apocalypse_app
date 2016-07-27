@@ -41,23 +41,4 @@ describe(Disaster) do
     test_disaster.every_day(test_user)
     expect(test_user.alive()).to(eq(true))
   end
-  it "tests to see if a disaster will kill someone" do
-    test_disaster = Disaster.create({name: 'Earthquake'})
-    test_user = User.create({name: 'Mike', alive: true})
-    test_resource_food = Resource.create({name: "Rubber Gloves", cost: 1.29, incrementable: true, unit: "Pair", item_type: "Food", value: 3})
-    test_amount4 = Amount.create({:user_id => test_user.id, :resource_id => test_resource_food.id, :quantity => 1})
-    test_user.compile_resources()
-    test_disaster.every_day(test_user)
-    expect(test_user.alive()).to(eq(false))
-  end
-  it "tests to see if resources will save a user" do
-    test_disaster = Disaster.create({name: 'Earthquake'})
-    test_user = User.create({name: 'Mike', alive: true})
-    test_resource_food = Resource.create({name: "Rubber Gloves", cost: 1.29, incrementable: true, unit: "Pair", item_type: "Food", value: 3})
-    test_amount4 = Amount.create({:user_id => test_user.id, :resource_id => test_resource_food.id, :quantity => 4})
-    test_user.compile_resources()
-    test_disaster.every_day(test_user)
-    test_disaster.every_day(test_user)
-    expect(test_user.alive()).to(eq(false))
-  end
 end

@@ -1,5 +1,7 @@
 <div class="container row">
   <div class="col-xs-12">
+
+
 <h1><%= @user.name %> </h1>
 <hr>
 <h4> Money to spend: $<%= @user.money %> </h4>
@@ -12,6 +14,12 @@
     Everything.
   <% end %>
 </h4>
+
+<ul class="list-group"><h3>Try your luck in a </h3>
+  <% @disasters.each do |disaster| %>
+    <li class="list-group-item"> <a href="/users/<%=@user.id%>/disasters/<%=disaster.id%>"> <%= disaster.name %> </a>
+  <% end %>
+
   </div>
 </div>
 
@@ -43,13 +51,15 @@
                   <% if amount %>
                     <h4> Quantity: <%= amount.quantity %> </h4>
                   <% end %>
-                <% else %>
+                </div>
+              <% else %>
+                <div class="well">
                   <form class="" action="/users/<%= @user.id %>/resources/<%= item.id %>/remove" method="post">
                     <input name="_method" type="hidden" value="patch">
                     <button class="btn btn-danger btn-sm" type="submit">Delete</button>
                   </form>
-                <% end %>
-              </div>
+                </div>
+              <% end %>
             </div>
           </div>
         <% end %>

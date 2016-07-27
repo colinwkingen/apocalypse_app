@@ -1,6 +1,8 @@
 <div class="row container">
+  <div class="col-xs-3">
 
-  <div class="col-xs-12">
+  </div>
+  <div class="col-xs-6">
     <h1>Recipe for Survival</h1>
     <label for="new_user">Enter New User:</label>
     <form name="new_user" action="/new_user" method="post">
@@ -13,11 +15,11 @@
 
 <div class="row container">
 
-  <div class="col-xs-12">
+  <div class="col-xs-3">
 
   </div>
 
-  <div class="col-xs-12">
+  <div class="col-xs-6">
     <% if @users %>
     <ul class="list-group">
       <% @users.each() do |user| %>
@@ -26,9 +28,11 @@
             <input name="_method" type="hidden" value="delete">
             <button class="btn btn-danger btn-sm" type="submit">Delete</button>
           </form>
+          <h4>Longest Survival: <%= user.high_score %></h4>
         </li>
       <% end %>
     <% end %>
+    </ul>
   </div>
 
 </div>
