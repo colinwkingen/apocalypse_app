@@ -19,7 +19,7 @@
   <% @disasters.each do |disaster| %>
     <li class="list-group-item"> <a href="/users/<%=@user.id%>/disasters/<%=disaster.id%>"> <%= disaster.name %> </a>
   <% end %>
-  
+
   </div>
 </div>
 
@@ -33,8 +33,8 @@
               <h4><%= item.name %> - <%= item.cost %> - <%= item.item_type %> - <%= item.value %></h4>
             </div>
             <div class="col-xs-6">
-              <% if item.incrementable == true %>
                 <div class="well">
+              <% if item.incrementable == true %>
                   <form class="" action="/users/<%= @user.id %>/resources/<%= item.id %>/increment" method="post">
                     <input name="_method" type="hidden" value="patch">
                     <button class="btn btn-sm" type="submit" value="up" id="up_button">
@@ -51,13 +51,13 @@
                   <% if amount %>
                     <h4> Quantity: <%= amount.quantity %> </h4>
                   <% end %>
-                <% else %>
+              <% else %>
                   <form class="" action="/users/<%= @user.id %>/resources/<%= item.id %>/remove" method="post">
                     <input name="_method" type="hidden" value="patch">
                     <button class="btn btn-danger btn-sm" type="submit">Delete</button>
                   </form>
-                <% end %>
-              </div>
+              <% end %>
+                </div>
             </div>
           </div>
         <% end %>

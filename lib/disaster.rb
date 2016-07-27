@@ -10,18 +10,21 @@ class Disaster < ActiveRecord::Base
     medicine_current = user.medicine_count.to_i
     protection_current = user.protection_count.to_i
     if self.name == 'Earthquake'
-      user.update({food_count: (food_current - 9)})
-      user.update({water_count: (water_current - 12)})
+      user.update({food_count: (food_current - 16)})
+      user.update({water_count: (water_current - 8)})
       if rand(3) > 1
-        user.update({medicine_count: (medicine_current - 3)})
-        user.update({protection_count: (protection_current - 3)})
+        user.update({medicine_count: (medicine_current - 7)})
+        user.update({protection_count: (protection_current - 7)})
+      end
+      if self.life_jacket?(user) && self.name == 'Earthquake'
+        user.update({alive: false})
       end
     end
     if self.name == 'Contagion'
-      user.update({food_count: (food_current - 12)})
-      user.update({water_count: (water_current - 12)})
+      user.update({food_count: (food_current - 16)})
+      user.update({water_count: (water_current - 8)})
       if rand(3) > 1
-        user.update({medicine_count: (medicine_current - 6)})
+        user.update({medicine_count: (medicine_current - 9)})
         user.update({protection_count: (protection_current - 6)})
       end
       if self.gas_mask?(user) && self.name == 'Contagion'
@@ -29,8 +32,8 @@ class Disaster < ActiveRecord::Base
       end
     end
     if self.name == 'Nuclear'
-      user.update({food_count: (food_current - 12)})
-      user.update({water_count: (water_current - 15)})
+      user.update({food_count: (food_current - 16)})
+      user.update({water_count: (water_current - 8)})
       if rand(3) > 1
         user.update({medicine_count: (medicine_current - 6)})
         user.update({protection_count: (protection_current - 9)})
@@ -82,5 +85,23 @@ class Disaster < ActiveRecord::Base
       end
     end
     chance_of_radiation
+  end
+
+  define_method(:life_jacket?) do |user|
+    resource_names = []
+    chance_of_drowning = false
+    user.resources.each() do |resource|
+      resource_names.push(resource.name)
+    end
+    if resource_names.include?("Life Jacket")
+      if rand(20) > 18
+        chance_of_drowning = true
+      end
+    else
+      if rand(20) > 9
+        chance_of_drowning = true
+      end
+    end
+    chance_of_drowning
   end
 end
