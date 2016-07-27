@@ -53,9 +53,6 @@ end
 
 post('/new_user') do
   User.create({name: params['new_user']})
-  if Resource.all.length == 0
-    Resource.populate_items()
-  end
   redirect to('/')
 end
 
@@ -75,6 +72,7 @@ get('/users/:id') do
   @resources = @resources.sort_by do |resource|
     resource[:id]
   end
+  @bottleneck = @user.bottleneck_resource()
   erb(:user)
 end
 

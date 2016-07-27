@@ -3,8 +3,15 @@
 <h1><%= @user.name %> </h1>
 <hr>
 <h4> Money to spend: $<%= @user.money %> </h4>
-
-
+<h4>You are most lacking :
+  <% if @bottleneck != [] %>
+    <% @bottleneck.each do |bottleneck| %>
+    <%= bottleneck %>
+    <% end %>
+  <% else %>
+    Everything.
+  <% end %>
+</h4>
   </div>
 </div>
 
@@ -18,8 +25,8 @@
               <h4><%= item.name %> - <%= item.cost %> - <%= item.item_type %> - <%= item.value %></h4>
             </div>
             <div class="col-xs-6">
-              <div class="well">
-                <% if item.incrementable == true %>
+              <% if item.incrementable == true %>
+                <div class="well">
                   <form class="" action="/users/<%= @user.id %>/resources/<%= item.id %>/increment" method="post">
                     <input name="_method" type="hidden" value="patch">
                     <button class="btn btn-sm" type="submit" value="up" id="up_button">
@@ -54,6 +61,7 @@
       <% @resources.each do |resource| %>
         <div class="well">
           <h4><%= resource.name %> - <%= resource.cost %> - <%= resource.unit %></h4>
+          <p><%= resource.blurb %></p>
           <form class='' action="/users/<%= @user.id %>/resources/<%=resource.id%>" method="post">
             <button class="btn btn-primary btn-sm" type="submit">Buy</button>
           </form>
