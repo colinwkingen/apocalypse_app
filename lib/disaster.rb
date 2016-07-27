@@ -5,18 +5,17 @@ class Disaster < ActiveRecord::Base
       break
     end
     messages = ''
-    food_current = user.food_count.to_i
-    water_current = user.water_count.to_i
-    medicine_current = user.medicine_count.to_i
-    protection_current = user.protection_count.to_i
+    if rand(3) > 1
+      messages.concat(find_resources(user))
+    end
     if self.name == 'Earthquake'
-      user.update({food_count: (food_current - 12)})
-      user.update({water_count: (water_current - 3)})
+      user.update({food_count: (user.food_count.to_i - 12)})
+      user.update({water_count: (user.water_count.to_i - 3)})
       if rand(3) > 1
-        user.update({medicine_count: (medicine_current - 7)})
-        user.update({protection_count: (protection_current - 7)})
+        user.update({medicine_count: (user.medicine_count.to_i - 7)})
+        user.update({protection_count: (user.protection_count.to_i - 7)})
       end
-      if rand(4) > 2
+      if rand(4) > 1
         if self.hard_hat?(user) && self.name == 'Earthquake'
           user.update({alive: false})
           messages.concat("You have met your end due to falling debri!")
@@ -26,13 +25,13 @@ class Disaster < ActiveRecord::Base
       end
     end
     if self.name == 'Contagion'
-      user.update({food_count: (food_current - 12)})
-      user.update({water_count: (water_current - 3)})
+      user.update({food_count: (user.food_count.to_i - 12)})
+      user.update({water_count: (user.water_count.to_i - 3)})
       if rand(3) > 1
-        user.update({medicine_count: (medicine_current - 9)})
-        user.update({protection_count: (protection_current - 6)})
+        user.update({medicine_count: (user.medicine_count.to_i - 9)})
+        user.update({protection_count: (user.protection_count.to_i - 6)})
       end
-      if rand(4) > 2
+      if rand(4) > 1
         if self.gas_mask?(user) && self.name == 'Contagion'
           user.update({alive: false})
           messages.concat("You have met your end due to the contaminated air!")
@@ -42,13 +41,13 @@ class Disaster < ActiveRecord::Base
       end
     end
     if self.name == 'Nuclear'
-      user.update({food_count: (food_current - 12)})
-      user.update({water_count: (water_current - 3)})
+      user.update({food_count: (user.food_count.to_i - 12)})
+      user.update({water_count: (user.water_count.to_i - 3)})
       if rand(3) > 1
-        user.update({medicine_count: (medicine_current - 6)})
-        user.update({protection_count: (protection_current - 9)})
+        user.update({medicine_count: (user.medicine_count.to_i - 6)})
+        user.update({protection_count: (user.protection_count.to_i - 9)})
       end
-      if rand(4) > 2
+      if rand(4) > 1
         if self.hazmat_suit?(user) && self.name == 'Nuclear'
           user.update({alive: false})
           messages.concat("You have met your end due to radioactive fallout!")
@@ -73,6 +72,25 @@ class Disaster < ActiveRecord::Base
       user.update({high_score: (user.high_score.to_i + 10)})
     end
     self.update({message: messages})
+  end
+
+  define_method(:find_resources) do |user|
+    message = ''
+    int = rand(6)
+    if int < 2
+      user.update({food_count: (user.food_count.to_i + 12)})
+      message.concat("Lucky you, you found some food to add to your stockpile!")
+    elsif int < 4
+      user.update({water_count: (user.water_count.to_i + 12)})
+      message.concat("Lucky you, you found some water to add to your stockpile!")
+    elsif int < 5
+      user.update({medicine_count: (user.medicine_count.to_i + 6)})
+      message.concat("Lucky you, you found some medicine to add to your stockpile!")
+    elsif int < 6
+      user.update({protection_count: (user.protection_count.to_i + 6)})
+      message.concat("Lucky you, you found some protection to add to your stockpile!")
+    end
+    message
   end
 
   define_method(:gas_mask?) do |user|
