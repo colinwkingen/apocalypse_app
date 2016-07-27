@@ -1,4 +1,4 @@
-class AddTypeAndValueToResources < ActiveRecord::Migration
+class AddTypeAndValueForResource < ActiveRecord::Migration
   def change
     add_column(:resources, :item_type, :string)
     add_column(:resources, :value, :int)
