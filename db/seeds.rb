@@ -8,7 +8,7 @@ Resource.create({name: "Pabst Blue Ribbon Six Pack", cost: 5.79, incrementable: 
 Resource.create({name: "Vicodin", cost: 5.00, incrementable: true, unit: "Pill", item_type: "Medicine", value: 3, blurb: "It takes the pain away."})
 Resource.create({name: "Jar of Pickles", cost: 3.59, incrementable: true, unit: "Jar", item_type: "Food", value: 1, blurb: "Preserved cucumbers. Stores well, but not many nutrients."})
 Resource.create({name: "Hard Hat", cost: 20.00, incrementable: false, unit: "Special", item_type: "Special", value: 3, blurb: "Keeps you afloat in case of tidal wave, bridge collapse or other hazards."})
-Resource.create({name: "Rubber Gloves", cost: 2.59, incrementable: true, unit: "Pair", item_type: "Special", value: 3, blurb: "If disease strikes, these will help you avoid catching it."})
+Resource.create({name: "Rubber Gloves", cost: 2.59, incrementable: true, unit: "Pair", item_type: "Protection", value: 5, blurb: "If disease strikes, these will help you avoid catching it."})
 Resource.create({name: "Can of Chicken Soup", cost: 2.29, incrementable: true, unit: "Can", item_type: "Food", value: 2, blurb: "Contains valuable protein and carbs. Best Served hot."})
 Resource.create({name: "MRE", cost: 4.29, incrementable: true, unit: "Package", item_type: "Food", value: 12, blurb: "High density military ration. About 1200 calories."})
 Resource.create({name: "Dried Apples", cost: 4.19, incrementable: true, unit: "Package", item_type: "Food", value: 4, blurb: "4.5oz package."})
