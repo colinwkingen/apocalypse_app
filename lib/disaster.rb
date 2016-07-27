@@ -15,6 +15,7 @@ class Disaster < ActiveRecord::Base
       if rand(3) > 1
         user.update({medicine_count: (medicine_current - 7)})
         user.update({protection_count: (protection_current - 7)})
+        messages.concat("Feeling pretty bad today; had to use some of your medicine!")
       end
       if rand(4) > 2
         if self.hard_hat?(user) && self.name == 'Earthquake'
@@ -24,6 +25,12 @@ class Disaster < ActiveRecord::Base
           messages.concat("You have come in contact with falling debri, wise choice to have a hard hat!")
         end
       end
+      if rand(5) == 3
+        messages.concat("You're getting REALLY sick of rice and beans.!")
+      end
+      if rand(7) == 0
+        messages.concat("Today there are a bunch of starving freaks trying to break in a steal your food.!")
+      end
     end
     if self.name == 'Contagion'
       user.update({food_count: (food_current - 12)})
@@ -31,6 +38,7 @@ class Disaster < ActiveRecord::Base
       if rand(3) > 1
         user.update({medicine_count: (medicine_current - 9)})
         user.update({protection_count: (protection_current - 6)})
+        messages.concat("Feeling kind of ill today; had to use a bunch of your medicine!")
       end
       if rand(4) > 2
         if self.gas_mask?(user) && self.name == 'Contagion'
@@ -40,6 +48,12 @@ class Disaster < ActiveRecord::Base
           messages.concat("You have come in contact with the contagion, wise choice to have a gas mask!")
         end
       end
+      if rand(6) == 3
+        messages.concat("You puked. Hopefully tomorrow will be a better day, but it probably won't be.!")
+      end
+      if rand(7) == 3
+        messages.concat("Today there is a gang of infected people clawing at your door.!")
+      end
     end
     if self.name == 'Nuclear'
       user.update({food_count: (food_current - 12)})
@@ -47,6 +61,7 @@ class Disaster < ActiveRecord::Base
       if rand(3) > 1
         user.update({medicine_count: (medicine_current - 6)})
         user.update({protection_count: (protection_current - 9)})
+        messages.concat("Your skin is itchy; had to use some medicine!")
       end
       if rand(4) > 2
         if self.hazmat_suit?(user) && self.name == 'Nuclear'
@@ -55,6 +70,12 @@ class Disaster < ActiveRecord::Base
         else
           messages.concat("You have come in contact with radioactive fallout, wise choice to have a hazmat suit!")
         end
+      end
+      if rand(6) == 3
+        messages.concat("All your friends and family are gone; why go on?!")
+      end
+      if rand(7) == 3
+        messages.concat("All the basic infrastructure of civilization has collapsed. Good luck making a new life.!")
       end
     end
     if user.food_count.to_i < 0
