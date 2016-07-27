@@ -1,12 +1,25 @@
 <div class="container row">
   <div class="col-xs-12">
-    <h1><%= @user.name %> </h1>
-    <hr>
-    <h4> Money to spend: $<%= @user.money %> </h4>
-    <ul class="list-group"><h3>Try your luck in a </h3>
-      <% @disasters.each do |disaster| %>
-        <li class="list-group-item"> <a href="/users/<%=@user.id%>/disasters/<%=disaster.id%>"> <%= disaster.name %> </a>
-      <% end %>
+
+
+<h1><%= @user.name %> </h1>
+<hr>
+<h4> Money to spend: $<%= @user.money %> </h4>
+<h4>You are most lacking :
+  <% if @bottleneck != [] %>
+    <% @bottleneck.each do |bottleneck| %>
+    <%= bottleneck %>
+    <% end %>
+  <% else %>
+    Everything.
+  <% end %>
+</h4>
+
+<ul class="list-group"><h3>Try your luck in a </h3>
+  <% @disasters.each do |disaster| %>
+    <li class="list-group-item"> <a href="/users/<%=@user.id%>/disasters/<%=disaster.id%>"> <%= disaster.name %> </a>
+  <% end %>
+  
   </div>
 </div>
 
@@ -20,8 +33,8 @@
               <h4><%= item.name %> - <%= item.cost %> - <%= item.item_type %> - <%= item.value %></h4>
             </div>
             <div class="col-xs-6">
-              <div class="well">
-                <% if item.incrementable == true %>
+              <% if item.incrementable == true %>
+                <div class="well">
                   <form class="" action="/users/<%= @user.id %>/resources/<%= item.id %>/increment" method="post">
                     <input name="_method" type="hidden" value="patch">
                     <button class="btn btn-sm" type="submit" value="up" id="up_button">
@@ -38,6 +51,11 @@
                   <% if amount %>
                     <h4> Quantity: <%= amount.quantity %> </h4>
                   <% end %>
+                <% else %>
+                  <form class="" action="/users/<%= @user.id %>/resources/<%= item.id %>/remove" method="post">
+                    <input name="_method" type="hidden" value="patch">
+                    <button class="btn btn-danger btn-sm" type="submit">Delete</button>
+                  </form>
                 <% end %>
               </div>
             </div>
@@ -48,13 +66,10 @@
   <div class="col-xs-6">
     <h2>Available Items:</h2>
     <% if @resources %>
-      <% @resources.order("id DESC").each do |resource| %>
+      <% @resources.each do |resource| %>
         <div class="well">
           <h4><%= resource.name %> - <%= resource.cost %> - <%= resource.unit %></h4>
-          <form class="" action="/users/<%= @user.id %>/resources/<%= resource.id %>" method="post">
-            <input name="_method" type="hidden" value="delete">
-            <button class="btn btn-danger btn-sm" type="submit">Delete</button>
-          </form>
+          <p><%= resource.blurb %></p>
           <form class='' action="/users/<%= @user.id %>/resources/<%=resource.id%>" method="post">
             <button class="btn btn-primary btn-sm" type="submit">Buy</button>
           </form>

@@ -2,8 +2,6 @@ require("bundler/setup")
 Bundler.require(:default)
 Dir[File.dirname(__FILE__) + '/lib/*.rb'].each { |file| require file}
 
-# Resource.populate_items()
-
 get('/') do
   @users = User.all()
 erb(:index)
@@ -44,6 +42,15 @@ patch('/users/:user_id/resources/:resource_id/decrement') do
   redirect('/users/' + user.id.to_s)
 end
 
+patch('/users/:user_id/resources/:resource_id/remove') do
+  user = User.find(params['user_id'].to_i)
+  resource = Resource.find(params['resource_id'].to_i)
+  amount = Amount.find_by(user_id: user.id, resource_id: resource.id)
+  amount.destroy
+  user.update({:money => (user.money + resource.cost)})
+  redirect('/users/' + user.id.to_s)
+end
+
 post('/new_user') do
   User.create({name: params['new_user']})
   redirect to('/')
@@ -51,9 +58,22 @@ end
 
 get('/users/:id') do
   @user = User.find(params['id'])
-  @resources = Resource.all()
+  @purchased_resource_names = []
+  @resources = []
   @inventory = @user.resources
   @disasters = Disaster.all()
+  @inventory.each do |resource|
+    @purchased_resource_names.push(resource.name)
+  end
+  Resource.all.each do |resource|
+    unless @purchased_resource_names.include?(resource.name)
+      @resources.push(resource)
+    end
+  end
+  @resources = @resources.sort_by do |resource|
+    resource[:id]
+  end
+  @bottleneck = @user.bottleneck_resource()
   erb(:user)
 end
 
