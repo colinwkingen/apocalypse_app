@@ -1,0 +1,59 @@
+body {
+  background-color: #2A2C31;
+  color: #e3dac9;
+  font-family: 'Stardos Stencil', cursive;
+}
+
+a {
+  color: #e3dac9;
+  font-size: 30px;
+}
+
+a:hover {
+  color: #C9B99B;
+  text-decoration: none;
+}
+
+#indexCol {
+  background-color: #2A2C31;
+  border-color: #e3dac9;
+}
+
+#newUserForm {
+  background-color: #e3dac9;
+  color: #2A2C31;
+}
+
+.btn {
+  color: #e3dac9;
+  border: 0 none;
+  font-weight: 250;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+}
+
+.btn:focus, .btn:active:focus, .btn.active:focus {
+    outline: 0 none;
+}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
+  background: #43080E;
+  transition-duration: 3s;
+  transition-delay: .1s;
+}
+.btn-primary {
+  background-color: #AE090D;
+}
+
+.btn-danger {
+    background: #e3dac9;
+    color: #e3dac9;
+}
+.btn-danger:hover, .btn-danger:focus, .btn-danger:active, .btn-danger.active, .open > .dropdown-toggle.btn-danger {
+    background: #5A2E2E;
+    transition-duration: 2s;
+    transition-delay: 1s;
+}
+.btn-danger:active, .btn-danger.active {
+    background: #5A2E2E;
+    box-shadow: none;
+}
