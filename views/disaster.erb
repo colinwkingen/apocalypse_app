@@ -6,10 +6,12 @@
   <h2>You died on day <%= @counter %> </h2>
 <% end %>
 
-<label for="new_user">Play out a day:</label>
-<form name="new_user" action="/users/<%=@user.id%>/disasters/<%=@disaster.id%>/<%=@counter%>" method="post">
-  <button class="btn btn-primary" type="submit">Go!</button>
-</form>
+<% if @user.alive %>
+  <label for="new_user">Play out a day:</label>
+  <form name="new_user" action="/users/<%=@user.id%>/disasters/<%=@disaster.id%>/<%=@counter%>" method="post">
+    <button class="btn btn-primary" type="submit">Go!</button>
+  </form>
+<% end %>
 
 <% if @message_arry %>
   <ul class="list-group">
