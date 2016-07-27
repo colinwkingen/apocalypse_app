@@ -13,17 +13,24 @@ class Disaster < ActiveRecord::Base
       user.update({food_count: (food_current - 12)})
       user.update({water_count: (water_current - 3)})
       if rand(3) > 1
-        user.update({medicine_count: (medicine_current - 3)})
-        user.update({protection_count: (protection_current - 3)})
+        user.update({medicine_count: (medicine_current - 7)})
+        user.update({protection_count: (protection_current - 7)})
         messages.concat("You fell down a cliff and broke your leg. Bummer; had to use a bunch of your medicine!")
       end
-      # self.update({message: messages})
+      if rand(4) > 2
+        if self.hard_hat?(user) && self.name == 'Earthquake'
+          user.update({alive: false})
+          messages.concat("You have met your end due to falling debri!")
+        else
+          messages.concat("You have come in contact with falling debri, wise choice to have a hard hat!")
+        end
+      end
     end
     if self.name == 'Contagion'
       user.update({food_count: (food_current - 12)})
       user.update({water_count: (water_current - 3)})
       if rand(3) > 1
-        user.update({medicine_count: (medicine_current - 6)})
+        user.update({medicine_count: (medicine_current - 9)})
         user.update({protection_count: (protection_current - 6)})
         messages.concat("Today you were exposed to the superflu. You had to use a bunch of your medicine!")
       end
@@ -35,7 +42,6 @@ class Disaster < ActiveRecord::Base
           messages.concat("You have come in contact with the contagion, wise choice to have a gas mask!")
         end
       end
-      # self.update({message: messages})
     end
     if self.name == 'Nuclear'
       user.update({food_count: (food_current - 12)})
@@ -53,7 +59,6 @@ class Disaster < ActiveRecord::Base
           messages.concat("You have come in contact with radioactive fallout, wise choice to have a hazmat suit!")
         end
       end
-      # self.update({message: messages})
     end
     if user.food_count.to_i < 0
       user.update({alive: false})
@@ -96,4 +101,17 @@ class Disaster < ActiveRecord::Base
     end
     chance_of_radiation
   end
+
+  define_method(:hard_hat?) do |user|
+    resource_names = []
+    chance_of_debri = false
+    user.resources.each() do |resource|
+      resource_names.push(resource.name)
+    end
+    unless resource_names.include?("Hard Hat")
+      chance_of_debri = true
+    end
+    chance_of_debri
+  end
+
 end

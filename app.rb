@@ -103,11 +103,12 @@ get('/users/:user_id/disasters/:disaster_id') do
   @counter = 0
   @user.alive = true
   @user.compile_resources
-
-  # while @user.alive == true do
-  #   @disaster.every_day(@user)
-  #   @counter += 1
-  # end
+  @special_items = []
+  @user.resources.each do |resource|
+    if resource.item_type == 'Special'
+      @special_items.push(resource)
+    end
+  end
   erb(:disaster)
 end
 
@@ -122,6 +123,12 @@ post('/users/:user_id/disasters/:disaster_id/:counter_id') do
     @message_arry = @disaster.message.split('!')
   else
     @message_arry = @disaster.message.split('!')
+  end
+  @special_items = []
+  @user.resources.each do |resource|
+    if resource.item_type == 'Special'
+      @special_items.push(resource)
+    end
   end
   erb(:disaster)
 end
