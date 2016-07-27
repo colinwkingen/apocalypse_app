@@ -70,7 +70,7 @@ class Disaster < ActiveRecord::Base
       user.update({alive: false})
       messages.concat("You won't survive the apocalypse without enough protection, you should BUY MORE RUBBER GLOVES!")
     else
-      user.update({high_score: (user.high_score.to_i + 10)})
+      user.update({high_score: (user.high_score.to_i + 1)})
     end
     self.update({message: messages})
   end
