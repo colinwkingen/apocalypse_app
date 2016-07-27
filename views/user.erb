@@ -32,7 +32,7 @@
         <li>
           <div class="well row">
             <div class="col-xs-8">
-              <h4><%= item.name %> - <%= item.cost %> - <%= item.item_type %> - <%= item.value %></h4>
+              <h4><%= item.name %> - <%= item.cost %> - <%= item.item_type %></h4>
             </div>
             <div class="col-xs-2">
                 <div class="">
@@ -50,8 +50,9 @@
                     </button>
                   </form>
                 </div>
-              <% else %>
-                <div class="well">
+              <% end %>
+              <% if item.incrementable != true %>
+                <div class="">
                   <form class="" action="/users/<%= @user.id %>/resources/<%= item.id %>/remove" method="post">
                     <input name="_method" type="hidden" value="patch">
                     <button class="btn btn-danger btn-sm" type="submit">Delete</button>
@@ -60,9 +61,11 @@
               <% end %>
             </div>
             <div class="col-xs-2 item_number">
-              <% amount =  Amount.find_by(user_id: @user.id, resource_id: item.id) %>
-              <% if amount %>
-                <h1 class="pull-right quantity"> <%= amount.quantity %> </h1>
+              <% if item.incrementable == true %>
+                <% amount =  Amount.find_by(user_id: @user.id, resource_id: item.id) %>
+                <% if amount %>
+                  <h1 class="pull-right quantity"> <%= amount.quantity %> </h1>
+                <% end %>
               <% end %>
             </div>
           </div>

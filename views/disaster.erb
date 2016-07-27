@@ -1,10 +1,17 @@
 <h2> <%= @user.name %>, you are trying to survive in a <%= @disaster.name %></h2>
+
 <h3> Day <%= @counter %> </h3>
 
-<label for="new_user">Play out a day:</label>
-<form name="new_user" action="/users/<%=@user.id%>/disasters/<%=@disaster.id%>/<%=@counter%>" method="post">
-  <button class="btn btn-primary" type="submit">Go!</button>
-</form>
+<% if @user.alive == false %>
+  <h2>You died on day <%= @counter %> </h2>
+<% end %>
+
+<% if @user.alive %>
+  <label for="new_user">Play out a day:</label>
+  <form name="new_user" action="/users/<%=@user.id%>/disasters/<%=@disaster.id%>/<%=@counter%>" method="post">
+    <button class="btn btn-primary" type="submit">Go!</button>
+  </form>
+<% end %>
 
 <% if @message_arry %>
   <ul class="list-group">
@@ -13,9 +20,9 @@
   <% end %>
   </ul>
 <% end %>
-<% if @user.alive == false %>
-  <h2>You died on day <%= @counter %> </h2>
-<% end %>
+
+<hr>
+
 <div class="row">
   <div class="col-xs-3">
     <ul class="list-group">
@@ -37,3 +44,7 @@
     <% end %>
   </div>
 </div>
+
+<hr>
+
+<a class = "btn btn-primary" href="/users/<%=@user.id%>">Back to Store</a>
