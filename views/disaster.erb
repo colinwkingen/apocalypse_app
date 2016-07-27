@@ -13,8 +13,27 @@
   <% end %>
   </ul>
 <% end %>
-
-
 <% if @user.alive == false %>
   <h2>You died on day <%= @counter %> </h2>
 <% end %>
+<div class="row">
+  <div class="col-xs-3">
+    <ul class="list-group">
+      <li class="list-group-item">Food Count: <%= @user.food_count %></li>
+      <li class="list-group-item">Water Count: <%= @user.water_count %></li>
+      <li class="list-group-item">Mdicine Count: <%= @user.medicine_count %></li>
+      <li class="list-group-item">Protection Count: <%= @user.protection_count %></li>
+    </ul>
+  </div>
+  <div class="col-xs-5">
+    <% if @special_items.length != 0 %>
+      <ul class="list-group">
+        <% @special_items.each do |item| %>
+          <li class="list-group-item"><%= item.name %></li>
+        <% end %>
+      </ul>
+    <% else %>
+      <h4>WARNING: You did not purchase any special items to help you survive the <%= @disaster.name %> Disaster</h4>
+    <% end %>
+  </div>
+</div>
