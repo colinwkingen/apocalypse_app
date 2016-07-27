@@ -100,10 +100,15 @@ end
 get('/users/:user_id/disasters/:disaster_id') do
   @user = User.find(params['user_id'])
   @disaster = Disaster.find(params['disaster_id'])
+  @counter = 0
   @user.alive = true
   @user.compile_resources
-
-  # @counter = 0
+  @special_items = []
+  @user.resources.each do |resource|
+    if resource.item_type == 'Special'
+      @special_items.push(resource)
+    end
+  end
   # while @user.alive == true do
   #   @disaster.every_day(@user)
   #   @counter += 1
@@ -111,8 +116,21 @@ get('/users/:user_id/disasters/:disaster_id') do
   erb(:disaster)
 end
 
-post('users/:user_id/disasters/:disaster_id/next') do
+post('/users/:user_id/disasters/:disaster_id/:counter_id') do
   @user = User.find(params['user_id'])
   @disaster = Disaster.find(params['disaster_id'])
-  @counter = 0
+  @counter = params['counter_id'].to_i
+  # binding.pry
+  if @user.alive == true
+    @disaster.every_day(@user)
+    @counter += 1
+  end
+  @message_arry = @disaster.message.split('!')
+  @special_items = []
+  @user.resources.each do |resource|
+    if resource.item_type == 'Special'
+      @special_items.push(resource)
+    end
+  end
+  erb(:disaster)
 end
