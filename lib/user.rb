@@ -18,6 +18,25 @@ class User < ActiveRecord::Base
     end
   end
 
+  define_method(:bottleneck_resource) do
+    self.compile_resources()
+    lowest_items = []
+    check_number = (self.food_count.to_i + self.water_count.to_i + self.protection_count.to_i + self.medicine_count.to_i) / 5
+    if self.food_count.to_i < check_number
+      lowest_items.push("Food")
+    end
+    if self.water_count.to_i < check_number
+      lowest_items.push("Water")
+    end
+    if self.medicine_count.to_i < check_number
+      lowest_items.push("Medicine")
+    end
+    if self.protection_count.to_i < check_number
+      lowest_items.push("Protection")
+    end
+    return lowest_items
+  end
+
 private
   define_method(:set_money) do
     self.money = rand(1000.00..2000.00).round(2)

@@ -53,6 +53,7 @@ get('/users/:id') do
   @user = User.find(params['id'])
   @resources = Resource.all()
   @inventory = @user.resources
+  @bottleneck = @user.bottleneck_resource()
   erb(:user)
 end
 
