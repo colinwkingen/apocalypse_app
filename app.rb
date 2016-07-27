@@ -115,9 +115,11 @@ post('/users/:user_id/disasters/:disaster_id/:counter_id') do
   @user = User.find(params['user_id'])
   @disaster = Disaster.find(params['disaster_id'])
   @counter = params['counter_id'].to_i
+  # binding.pry
   if @user.alive == true
     @disaster.every_day(@user)
     @counter += 1
   end
+  @message_arry = @disaster.message.split('!')
   erb(:disaster)
 end
