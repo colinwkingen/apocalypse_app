@@ -2,8 +2,6 @@ require("bundler/setup")
 Bundler.require(:default)
 Dir[File.dirname(__FILE__) + '/lib/*.rb'].each { |file| require file}
 
-Resource.populate_items()
-
 get('/') do
   @users = User.all()
 erb(:index)
@@ -46,13 +44,38 @@ end
 
 post('/new_user') do
   User.create({name: params['new_user']})
+  populate = false
+  Resource.all().each() do |resource|
+    unless resource.name == "Beans"
+      populate = true
+    end
+  end
+  populate
+  if populate
+    Resource.populate_items()
+  end
   redirect to('/')
 end
 
 get('/users/:id') do
   @user = User.find(params['id'])
-  @resources = Resource.all()
+  @resources = []
   @inventory = @user.resources
+  @inventory = @inventory.sort_by do |resource|
+    resource[:id]
+  end
+  testers = []
+  @inventory.each() do |resource|
+    testers.push(resource.name)
+  end
+  Resource.all().each do |resource|
+    unless testers.include?(resource.name)
+      @resources.push(resource)
+    end
+  end
+  @resources = @resources.sort_by do |resource|
+    resource[:id]
+  end
   erb(:user)
 end
 
