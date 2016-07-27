@@ -1,10 +1,12 @@
 <div class="container row">
   <div class="col-xs-12">
-<h1><%= @user.name %> </h1>
-<hr>
-<h4> Money to spend: $<%= @user.money %> </h4>
-
-
+    <h1><%= @user.name %> </h1>
+    <hr>
+    <h4> Money to spend: $<%= @user.money %> </h4>
+    <ul class="list-group"><h3>Try your luck in a </h3>
+      <% @disasters.each do |disaster| %>
+        <li class="list-group-item"> <a href="/users/<%=@user.id%>/disasters/<%=disaster.id%>"> <%= disaster.name %> </a>
+      <% end %>
   </div>
 </div>
 

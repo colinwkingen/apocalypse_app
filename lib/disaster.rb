@@ -34,7 +34,7 @@ class Disaster < ActiveRecord::Base
     end
     if (user.food_count.to_i < 0) || (user.water_count.to_i < 0)
       user.update({alive: false})
-    elsif (user.medicine_count.to_i < 0) || (user.medicine_count.to_i < 0)
+    elsif (user.medicine_count.to_i < 0) || (user.protection_count.to_i < 0)
       user.update({alive: false})
     else
       user.update({high_score: (user.high_score.to_i + 10)})

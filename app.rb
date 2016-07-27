@@ -2,7 +2,7 @@ require("bundler/setup")
 Bundler.require(:default)
 Dir[File.dirname(__FILE__) + '/lib/*.rb'].each { |file| require file}
 
-Resource.populate_items()
+# Resource.populate_items()
 
 get('/') do
   @users = User.all()
@@ -53,6 +53,7 @@ get('/users/:id') do
   @user = User.find(params['id'])
   @resources = Resource.all()
   @inventory = @user.resources
+  @disasters = Disaster.all()
   erb(:user)
 end
 
