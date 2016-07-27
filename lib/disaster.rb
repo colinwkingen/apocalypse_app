@@ -1,10 +1,10 @@
 class Disaster < ActiveRecord::Base
 
   define_method(:every_day) do |user|
-    messages = ''
     if user.alive == false
       break
     end
+    messages = ''
     food_current = user.food_count.to_i
     water_current = user.water_count.to_i
     medicine_current = user.medicine_count.to_i
@@ -30,9 +30,9 @@ class Disaster < ActiveRecord::Base
       if rand(4) > 2
         if self.gas_mask?(user) && self.name == 'Contagion'
           user.update({alive: false})
-          message.concat("You have met your end due to the contaminated air/")
+          messages.concat("You have met your end due to the contaminated air!")
         else
-          message.concat("You have come in contact with the contagion, wise choice to have a gas mask/")
+          messages.concat("You have come in contact with the contagion, wise choice to have a gas mask!")
         end
       end
     end
@@ -46,24 +46,24 @@ class Disaster < ActiveRecord::Base
       if rand(4) > 2
         if self.hazmat_suit?(user) && self.name == 'Nuclear'
           user.update({alive: false})
-          message.concat("You have met your end due to radioactive fallout/")
+          messages.concat("You have met your end due to radioactive fallout!")
         else
-          message.concat("You have come in contact with radioactive fallout, wise choice to have a hazmat suit/")
+          messages.concat("You have come in contact with radioactive fallout, wise choice to have a hazmat suit!")
         end
       end
     end
     if user.food_count.to_i < 0
       user.update({alive: false})
-      message.concat("You won't survive the apocalypse without enough food, you should BUY MORE BEANS/")
+      messages.concat("You won't survive the apocalypse without enough food, you should BUY MORE BEANS!")
     elsif user.water_count.to_i < 0
       user.update({alive: false})
-      message.concat("You won't survive the apocalypse without enough water, you should BUY MORE FRESCA/")
+      messages.concat("You won't survive the apocalypse without enough water, you should BUY MORE FRESCA!")
     elsif user.medicine_count.to_i < 0
       user.update({alive: false})
-      message.concat("You won't survive the apocalypse without enough medicine, you should BUY MORE VICODIN/")
+      messages.concat("You won't survive the apocalypse without enough medicine, you should BUY MORE VICODIN!")
     elsif user.protection_count.to_i < 0
       user.update({alive: false})
-      message.concat("You won't survive the apocalypse without enough protection, you should BUY MORE RUBBER GLOVES/")
+      messages.concat("You won't survive the apocalypse without enough protection, you should BUY MORE RUBBER GLOVES!")
     else
       user.update({high_score: (user.high_score.to_i + 10)})
     end
