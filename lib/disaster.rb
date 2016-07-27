@@ -15,7 +15,7 @@ class Disaster < ActiveRecord::Base
         user.update({medicine_count: (user.medicine_count.to_i - 7)})
         user.update({protection_count: (user.protection_count.to_i - 7)})
       end
-      if rand(4) > 1
+      if rand(20) < 2
         if self.hard_hat?(user) && self.name == 'Earthquake'
           user.update({alive: false})
           messages.concat("You have met your end due to falling debri!")
@@ -31,7 +31,7 @@ class Disaster < ActiveRecord::Base
         user.update({medicine_count: (user.medicine_count.to_i - 9)})
         user.update({protection_count: (user.protection_count.to_i - 6)})
       end
-      if rand(4) > 1
+      if rand(20) < 2
         if self.gas_mask?(user) && self.name == 'Contagion'
           user.update({alive: false})
           messages.concat("You have met your end due to the contaminated air!")
@@ -47,7 +47,7 @@ class Disaster < ActiveRecord::Base
         user.update({medicine_count: (user.medicine_count.to_i - 6)})
         user.update({protection_count: (user.protection_count.to_i - 9)})
       end
-      if rand(4) > 1
+      if rand(20) < 2
         if self.hazmat_suit?(user) && self.name == 'Nuclear'
           user.update({alive: false})
           messages.concat("You have met your end due to radioactive fallout!")
