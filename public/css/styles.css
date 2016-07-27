@@ -1,0 +1,12 @@
+ul {
+  list-style: none;
+}
+
+.item_number {
+  background-color: #444;
+  color: #FFFAFA;
+}
+
+.quantity {
+  text-align: center;
+}

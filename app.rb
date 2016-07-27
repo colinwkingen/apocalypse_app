@@ -100,10 +100,10 @@ end
 get('/users/:user_id/disasters/:disaster_id') do
   @user = User.find(params['user_id'])
   @disaster = Disaster.find(params['disaster_id'])
+  @counter = 0
   @user.alive = true
   @user.compile_resources
 
-  # @counter = 0
   # while @user.alive == true do
   #   @disaster.every_day(@user)
   #   @counter += 1
@@ -111,8 +111,13 @@ get('/users/:user_id/disasters/:disaster_id') do
   erb(:disaster)
 end
 
-post('users/:user_id/disasters/:disaster_id/next') do
+post('/users/:user_id/disasters/:disaster_id/:counter_id') do
   @user = User.find(params['user_id'])
   @disaster = Disaster.find(params['disaster_id'])
-  @counter = 0
+  @counter = params['counter_id'].to_i
+  if @user.alive == true
+    @disaster.every_day(@user)
+    @counter += 1
+  end
+  erb(:disaster)
 end
