@@ -61,6 +61,7 @@ get('/users/:id') do
   @purchased_resource_names = []
   @resources = []
   @inventory = @user.resources
+  @disasters = Disaster.all()
   @inventory.each do |resource|
     @purchased_resource_names.push(resource.name)
   end
@@ -94,4 +95,24 @@ post('/users/:user_id/resources/:resource_id') do
   new_amount = Amount.create({:user_id => user.id, :resource_id => item.id, :quantity => 1})
   user.update({:money => (user.money - item.cost)})
   redirect('/users/' + user.id.to_s)
+end
+
+get('/users/:user_id/disasters/:disaster_id') do
+  @user = User.find(params['user_id'])
+  @disaster = Disaster.find(params['disaster_id'])
+  @user.alive = true
+  @user.compile_resources
+
+  # @counter = 0
+  # while @user.alive == true do
+  #   @disaster.every_day(@user)
+  #   @counter += 1
+  # end
+  erb(:disaster)
+end
+
+post('users/:user_id/disasters/:disaster_id/next') do
+  @user = User.find(params['user_id'])
+  @disaster = Disaster.find(params['disaster_id'])
+  @counter = 0
 end
