@@ -76,3 +76,23 @@ post('/users/:user_id/resources/:resource_id') do
   user.update({:money => (user.money - item.cost)})
   redirect('/users/' + user.id.to_s)
 end
+
+get('/users/:user_id/disasters/:disaster_id') do
+  @user = User.find(params['user_id'])
+  @disaster = Disaster.find(params['disaster_id'])
+  @user.alive = true
+  @user.compile_resources
+
+  # @counter = 0
+  # while @user.alive == true do
+  #   @disaster.every_day(@user)
+  #   @counter += 1
+  # end
+  erb(:disaster)
+end
+
+post('users/:user_id/disasters/:disaster_id/next') do
+  @user = User.find(params['user_id'])
+  @disaster = Disaster.find(params['disaster_id'])
+  @counter = 0
+end

@@ -1,0 +1,6 @@
+<h2> <%= @user.name %>, you are trying to survive in a <%= @disaster.name %></h2>
+
+<label for="new_user">Play out a day:</label>
+<form name="new_user" action="users/<%=@user.id%>/disasters/<%=@disaster.id%>/next" method="post">
+  <button class="btn btn-primary" type="submit">Go!</button>
+</form>
