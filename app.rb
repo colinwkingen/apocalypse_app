@@ -122,7 +122,6 @@ post('/users/:user_id/disasters/:disaster_id/:counter_id') do
   if @user.high_score.to_i < (@counter + 1)
     @user.update({high_score: (@counter + 1)})
   end
-binding.pry
   if @user.alive == true
     if radios = @disaster.choices_writer
       @scenario = radios[0]
