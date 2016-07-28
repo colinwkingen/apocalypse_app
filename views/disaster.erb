@@ -10,7 +10,7 @@
 <% if @user.high_score.to_i < @counter && @user.alive == false %>
   <h2> This is your longest survival yet!  You made it <%= @counter - @user.high_score.to_i %> days longer than your previous longest run.</h2>
 <% end %>
-<h1><%= @this_high_score %></h1>
+<h1>Previous record: <%= @high_score %> days survived</h1>
 
 
 
