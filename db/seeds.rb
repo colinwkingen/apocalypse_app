@@ -2,7 +2,7 @@ require("./lib/resource")
 require("./lib/disaster")
 
 Resource.create({name: "Can of Beans", cost: 1.29, incrementable: true, unit: "Can", item_type: "Food", value: 4, blurb: "Protein rich, cheap and long storage life."})
-Resource.create({name: "Bottled Water", cost: 15.00, incrementable: true, unit: "Gallon", item_type: "Water", value: 2, blurb: "16oz of fresh water."})
+Resource.create({name: "Bottled Water", cost: 1.29, incrementable: true, unit: "Bottle", item_type: "Water", value: 1, blurb: "16oz of fresh water."})
 Resource.create({name: "Black Cherry Fresca", cost: 1.79, incrementable: true, unit: "Can", item_type: "Water", value: 1, blurb: "Delicious zero calorie soft drink."})
 Resource.create({name: "Pabst Blue Ribbon Six Pack", cost: 5.79, incrementable: true, unit: "Can", item_type: "Water", value: 4, blurb: "Delicious beverage. Not the best at hydrating though."})
 Resource.create({name: "Vicodin", cost: 5.00, incrementable: true, unit: "Pill", item_type: "Medicine", value: 3, blurb: "It takes the pain away."})
@@ -18,7 +18,8 @@ Resource.create({name: "Can of Tuna", cost: 0.99, incrementable: true, unit: "Ca
 Resource.create({name: "Gas Mask", cost: 148.99, incrementable: false, unit: "Mask", item_type: "Special", value: 2, blurb: "Tactical gas mask. Protects you from inhaling toxic materials."})
 Resource.create({name: "Hazmat Suit", cost: 178.99, incrementable: false, unit: "Suit", item_type: "Special", value: 2, blurb: "Full body cover to protect from biohazard and disease."})
 Resource.create({name: "Cat Food", cost: 0.59, incrementable: true, unit: "Can", item_type: "Food", value: 1, blurb: "Meow meow meow meow meow meow meow meow."})
-
+Resource.create({name: "Antibiotics", cost: 17.50, incrementable: true, unit: "Bottle", item_type: "Medicine", value: 10, blurb: "Antibiotics. Always take the whole course."})
+Resource.create({name: "Hiking Boots", cost: 49.99, incrementable: true, unit: "Pair", item_type: "Medicine", value: 40, blurb: "Good boots will protect your feet and make getting around easier."})
 
 Disaster.create({name: 'Earthquake'})
 Disaster.create({name: 'Contagion'})

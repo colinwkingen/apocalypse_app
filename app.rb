@@ -100,7 +100,7 @@ end
 get('/users/:user_id/disasters/:disaster_id') do
   @user = User.find(params['user_id'])
   @disaster = Disaster.find(params['disaster_id'])
-  @counter = 0
+  @counter = 1
   @user.alive = true
   @user.compile_resources
   @special_items = []
