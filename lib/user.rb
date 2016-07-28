@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   before_create(:set_money)
 
   define_method(:compile_resources) do
-    self.update({food_count: 0, water_count: 0, medicine_count: 0, protection_count: 0})
+    self.update({food_count: 0, water_count: 0, medicine_count: 0, protection_count: 0, event_flag: true})
     self.resources.each() do |resource|
       amount = Amount.find_by(user_id: self.id, resource_id: resource.id)
       if resource.item_type == 'Food'

@@ -124,14 +124,14 @@ post('/users/:user_id/disasters/:disaster_id/:counter_id') do
   #   @user.update({high_score: (@counter + 1)})
   # end
   if @user.alive == true
-    if radios = @disaster.choices_writer
+    if (radios = @disaster.choices_writer) && @user.event_flag
       @scenario = radios[0]
       @multiple_choice = radios[1]
     end
     @disaster.every_day(@user)
     @counter += 1
     @message_arry = @disaster.message.split('!')
-    if value > 0
+    if (value > 0) && @user.event_flag
       @message_arry.push(@disaster.choices_reader(@user, value))
     end
   else
