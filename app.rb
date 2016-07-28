@@ -100,19 +100,45 @@ end
 get('/users/:user_id/disasters/:disaster_id') do
   @user = User.find(params['user_id'])
   @disaster = Disaster.find(params['disaster_id'])
+  @counter = 0
   @user.alive = true
   @user.compile_resources
-
-  # @counter = 0
-  # while @user.alive == true do
-  #   @disaster.every_day(@user)
-  #   @counter += 1
-  # end
+  @special_items = []
+  @user.resources.each do |resource|
+    if resource.item_type == 'Special'
+      @special_items.push(resource)
+    end
+  end
   erb(:disaster)
 end
 
-post('users/:user_id/disasters/:disaster_id/next') do
+post('/users/:user_id/disasters/:disaster_id/:counter_id') do
   @user = User.find(params['user_id'])
   @disaster = Disaster.find(params['disaster_id'])
-  @counter = 0
+  @counter = params['counter_id'].to_i
+  value = params['choice_radio'].to_i
+  if @user.high_score.to_i < (@counter + 1)
+    @user.update({high_score: (@counter + 1)})
+  end
+  if @user.alive == true
+    if radios = @disaster.choices_writer
+      @scenario = radios[0]
+      @multiple_choice = radios[1]
+    end
+    @disaster.every_day(@user)
+    @counter += 1
+    @message_arry = @disaster.message.split('!')
+    if value > 0
+      @message_arry.push(@disaster.choices_reader(@user, value))
+    end
+  else
+    @message_arry = @disaster.message.split('!')
+  end
+  @special_items = []
+  @user.resources.each do |resource|
+    if resource.item_type == 'Special'
+      @special_items.push(resource)
+    end
+  end
+  erb(:disaster)
 end

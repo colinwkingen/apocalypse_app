@@ -24,12 +24,26 @@ a:hover {
   color: #2A2C31;
 }
 
+#inventory {
+  background-color: #2A2C31;
+}
+
+.updownBtn {
+  border-radius: 0;
+  background-color: #43080E;
+  color: #2A2C31;
+}
+
 .btn {
   color: #e3dac9;
   border: 0 none;
   font-weight: 250;
   letter-spacing: .5px;
   text-transform: uppercase;
+}
+
+.disasterRow {
+  text-align: center;
 }
 
 .btn:focus, .btn:active:focus, .btn.active:focus {
@@ -46,7 +60,7 @@ a:hover {
 
 .btn-danger {
     background: #e3dac9;
-    color: #e3dac9;
+    color: #43080E;
 }
 .btn-danger:hover, .btn-danger:focus, .btn-danger:active, .btn-danger.active, .open > .dropdown-toggle.btn-danger {
     background: #5A2E2E;
@@ -56,4 +70,26 @@ a:hover {
 .btn-danger:active, .btn-danger.active {
     background: #5A2E2E;
     box-shadow: none;
+
+}
+
+ul {
+  list-style: none;
+}
+
+.item_number {
+  background-color: #003;
+  color: #FFFAFA;
+}
+
+.disasterLi {
+  background-color: #2A2C31
+}
+
+.quantity {
+  text-align: center;
+}
+
+.disasterBckgrnd {
+  background-color: #2A2C31;
 }

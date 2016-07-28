@@ -1,9 +1,4 @@
-User Stories:
-
-* I want to be able to pick the disaster I suffer.
-* I want to see how long I would survive in a particular disaster.
-* I want to be able to see the high scores.
-
+Known issues:
 
 Completed User Stories:
 
@@ -16,3 +11,6 @@ Completed User Stories:
 * I want to be able to log in and have it remember me.
 * I want to know what my bottleneck resource is.
 * I want to be able to click on a resource and have it display a blurb.
+* I want to be able to pick the disaster I suffer.
+* I want to see how long I would survive in a particular disaster.
+* I want to be able to see the high scores.

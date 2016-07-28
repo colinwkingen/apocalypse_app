@@ -3,7 +3,6 @@
 
   </div>
   <div class="col-xs-6">
-    <h1>Recipe for Survival</h1>
     <label for="new_user">Enter New User:</label>
     <form name="new_user" action="/new_user" method="post">
       <input id="newUserForm" type="text" name="new_user" id="new_user">
@@ -28,7 +27,9 @@
             <input name="_method" type="hidden" value="delete">
             <button class="btn btn-danger btn-sm" type="submit">Delete</button>
           </form>
-          <h4>Longest Survival: <%= user.high_score %></h4>
+          <% if user.high_score %>
+            <h4>Longest Survival: <%= user.high_score %> Days</h4>
+          <% end %>
         </li>
       <% end %>
     <% end %>
