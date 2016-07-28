@@ -119,7 +119,7 @@ post('/users/:user_id/disasters/:disaster_id/:counter_id') do
   # binding.pry
   if @user.alive == true
     @disaster.every_day(@user)
-    @counter += 1
+    @counter += 0
     @message_arry = @disaster.message.split('!')
   else
     @message_arry = @disaster.message.split('!')
