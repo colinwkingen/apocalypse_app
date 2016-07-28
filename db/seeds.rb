@@ -2,7 +2,7 @@ require("./lib/resource")
 require("./lib/disaster")
 
 Resource.create({name: "Hiking Boots", cost: 49.99, incrementable: true, unit: "Pair", item_type: "Protection", value: 40, blurb: "Good boots will protect your feet and make getting around easier."})
-Resource.create({name: "Gallon Jug of Water", cost: 5.79, incrementable: true, unit: "Package", item_type: "Water", value: 8, blurb: "Humans require about one gallon of water a day."})
+Resource.create({name: "Gallon Jug of Water", cost: 5.79, incrementable: true, unit: "Jug", item_type: "Water", value: 8, blurb: "Humans require about one gallon of water a day."})
 Resource.create({name: "Flat of Canned Food", cost: 42.59, incrementable: true, unit: "Cans", item_type: "Food", value: 30, blurb: "24 assorted cans of food on sale at grocery outlet."})
 Resource.create({name: "First Aid Kit", cost: 30.00, incrementable: true, unit: "Kit", item_type: "Medicine", value: 25, blurb: "Treats small wounds and injuries."})
 Resource.create({name: "Gas Mask", cost: 148.99, incrementable: false, unit: "Mask", item_type: "Special", value: 2, blurb: "Tactical gas mask. Protects you from inhaling toxic materials."})
