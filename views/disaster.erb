@@ -1,14 +1,18 @@
-<<<<<<< HEAD
+
 <h2> <%= @user.name %>, you are trying to survive the <%= @disaster.name %> event.</h2>
-=======
-<h2> <%= @user.name %>, you are trying to survive the <%= @disaster.name %> event</h2>
->>>>>>> 6b1476b48d3ffa10838f930e25b14f1d62d61697
 
-<h3> Day <%= @counter %> </h3>
-
-<% if @user.alive == false %>
-  <h2>You died on day <%= @counter %> </h2>
+<% if @user.alive %>
+  <h3> Day <%= @counter %> </h3>
 <% end %>
+<% if @user.alive == false %>
+  <h2> You died on day <%= @counter %> </h2>
+<% end %>
+<% if @user.high_score.to_i < @counter && @user.alive == false %>
+  <h2> This is your longest survival yet!  You made it <%= @counter - @user.high_score.to_i %> days longer than your previous longest run.</h2>
+<% end %>
+<h1><%= @this_high_score %></h1>
+
+
 
 <% if @user.alive %>
   <label for="new_user">Play out a day:</label>
