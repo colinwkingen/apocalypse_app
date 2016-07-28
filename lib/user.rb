@@ -4,16 +4,17 @@ class User < ActiveRecord::Base
   before_create(:set_money)
 
   define_method(:compile_resources) do
+    self.update({food_count: 0, water_count: 0, medicine_count: 0, protection_count: 0})
     self.resources.each() do |resource|
       amount = Amount.find_by(user_id: self.id, resource_id: resource.id)
       if resource.item_type == 'Food'
-        self.update({food_count: (resource.value * amount.quantity)})
+        self.update({food_count: (resource.value * amount.quantity + self.food_count.to_i)})
       elsif resource.item_type == 'Medicine'
-        self.update({medicine_count: (resource.value * amount.quantity)})
+        self.update({medicine_count: (resource.value * amount.quantity + self.medicine_count.to_i)})
       elsif resource.item_type == 'Protection'
-        self.update({protection_count: (resource.value * amount.quantity)})
+        self.update({protection_count: (resource.value * amount.quantity + self.protection_count.to_i)})
       elsif resource.item_type == 'Water'
-        self.update({water_count: (resource.value * amount.quantity)})
+        self.update({water_count: (resource.value * amount.quantity + self.water_count.to_i)})
       end
     end
   end
@@ -22,7 +23,7 @@ class User < ActiveRecord::Base
     self.compile_resources()
     lowest_items = []
     check_number = (self.food_count.to_i + self.water_count.to_i + self.protection_count.to_i + self.medicine_count.to_i) / 5
-    if self.food_count.to_i < check_number
+    if self.food_count.to_i  < check_number
       lowest_items.push("Food")
     end
     if self.water_count.to_i < check_number
@@ -33,6 +34,8 @@ class User < ActiveRecord::Base
     end
     if self.protection_count.to_i < check_number
       lowest_items.push("Protection")
+    elsif check_number == 0
+      lowest_items.push('everything')
     end
     return lowest_items
   end
