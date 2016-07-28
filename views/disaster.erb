@@ -1,11 +1,18 @@
 
-<h2> <%= @user.name %>, you are trying to survive the <%= @disaster.name %> event</h2>
+<h2> <%= @user.name %>, you are trying to survive the <%= @disaster.name %> event.</h2>
 
-<h3> Day <%= @counter %> </h3>
-
-<% if @user.alive == false %>
-  <h2>You died on day <%= @counter %> </h2>
+<% if @user.alive %>
+  <h3> Day <%= @counter %> </h3>
 <% end %>
+<% if @user.alive == false %>
+  <h2> You died on day <%= @counter %> </h2>
+<% end %>
+<% if @user.high_score.to_i < @counter && @user.alive == false %>
+  <h2> This is your longest survival yet!  You made it <%= @counter - @user.high_score.to_i %> days longer than your previous longest run.</h2>
+<% end %>
+<h1><%= @this_high_score %></h1>
+
+
 
 <% if @user.alive %>
   <label for="new_user">Play out a day:</label>
@@ -43,17 +50,11 @@
 <div class="row">
   <div class="col-xs-3">
     <ul class="list-group">
-<<<<<<< HEAD
-      <li class="list-group-item">Food Count: <%= @user.food_count %></li>
-      <li class="list-group-item">Water Count: <%= @user.water_count %></li>
-      <li class="list-group-item">Medicine Count: <%= @user.medicine_count %></li>
-      <li class="list-group-item">Protection Count: <%= @user.protection_count %></li>
-=======
+
       <li class="disasterBckgrnd list-group-item">Food Count: <%= @user.food_count %></li>
       <li class="disasterBckgrnd list-group-item">Water Count: <%= @user.water_count %></li>
       <li class="disasterBckgrnd list-group-item">Medicine Count: <%= @user.medicine_count %></li>
       <li class="disasterBckgrnd list-group-item">Protection Count: <%= @user.protection_count %></li>
->>>>>>> styling_test
     </ul>
   </div>
   <div class="col-xs-5">
