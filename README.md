@@ -1,6 +1,14 @@
-Known issues:
 
-Completed User Stories:
+## Recipe for Survival
+
+#### By Colin Kingen, Matt Carlson, Cameron Poore, Patrick Lipscomb 2016
+
+
+## Description
+
+This is a group final project for the ruby class. It uses object oriented
+design and many to many relationships in the ActiveRecord database to create
+a fun game. It completes the following user stories developed before coding:
 
 * I want to create a user and be assigned an amount of money.
 * I want to be able to delete users
@@ -14,3 +22,42 @@ Completed User Stories:
 * I want to be able to pick the disaster I suffer.
 * I want to see how long I would survive in a particular disaster.
 * I want to be able to see the high scores.
+
+
+## Setup/Installation Requirements
+
+To install this repository into a new project each time, first
+
+* Clone the github repository using the git clone command from /Desktop
+* install postgres gem
+* Create a new folder in the Desktop with your project name
+* Use ActiveRecord to install databases with rake
+
+## Known Bugs
+
+No currently known bugs.
+
+## Support and contact details
+
+Contact us on github if you have any questions.
+
+## Technologies Used
+
+* HTML
+* Sinatra
+* Ruby
+* ActiveRecord
+* CSS and Bootstrap
+* Capybara
+
+### License
+
+Licensed under the MIT License
+
+Copyright (c) 2016 **Colin Kingen, Matt Carlson, Cameron Poore, Patrick Lipscomb**
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
