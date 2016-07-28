@@ -121,7 +121,7 @@ post('/users/:user_id/disasters/:disaster_id/:counter_id') do
     @user.update({high_score: (@counter + 1)})
   end
   if @user.alive == true
-    if radios = @disaster.choices_writter
+    if radios = @disaster.choices_writer
       @scenario = radios[0]
       @multiple_choice = radios[1]
     end
