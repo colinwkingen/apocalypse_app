@@ -3,15 +3,25 @@
 
 
 <h1><%= @user.name %> </h1>
+<% if @user.high_score %>
+  <% if @user.high_score > 1 %>
+    <h2>Longest survival: <%= @user.high_score %> days</h2>
+  <% elsif @user.high_score == 1 %>
+    <h2>Longest survival: 1 day</h2>
+  <% end %>
+<% end %>
+
 <hr>
 <h4> Money to spend: $<%= @user.money %> </h4>
 <h4>You are
-  <% if @bottleneck != [] %>
+  <% if (@bottleneck != []) && (@bottleneck[0] != 'everything') %>
     most lacking : <% @bottleneck.each do |bottleneck| %>
     | <%= bottleneck %> |
     <% end %>
+  <% elsif @bottleneck[0] == 'everything'%>
+    not going to survive without any resources! Buy some stuff.
   <% else %>
-    not lacking any particular resource.
+    not lacking any particular resource
   <% end %>
 </h4>
 

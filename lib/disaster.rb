@@ -20,7 +20,11 @@ class Disaster < ActiveRecord::Base
       if rand(20) < 2
         if self.hard_hat?(user) && self.name == 'Earthquake'
           user.update({alive: false})
+<<<<<<< HEAD
           messages.concat("You have met your end due to falling debris.!")
+=======
+          messages.concat("<strong>You have met your end due to falling debri</strong>!")
+>>>>>>> 6b1476b48d3ffa10838f930e25b14f1d62d61697
         else
           messages.concat("You have come in contact with falling debris, wise choice to have a hard hat.!")
         end
@@ -44,7 +48,7 @@ class Disaster < ActiveRecord::Base
       if rand(20) < 2
         if self.gas_mask?(user) && self.name == 'Contagion'
           user.update({alive: false})
-          messages.concat("You have met your end due to the contaminated air!")
+          messages.concat("<strong>You have met your end due to the contaminated air</strong>!")
         else
           messages.concat("You have come in contact with the contagion, wise choice to have a gas mask!")
         end
@@ -68,7 +72,7 @@ class Disaster < ActiveRecord::Base
       if rand(20) < 2
         if self.hazmat_suit?(user) && self.name == 'Nuclear'
           user.update({alive: false})
-          messages.concat("You have met your end due to radioactive fallout!")
+          messages.concat("<strong>You have met your end due to radioactive fallout</strong>!")
         else
           messages.concat("You have come in contact with radioactive fallout, wise choice to have a hazmat suit!")
         end
@@ -82,16 +86,16 @@ class Disaster < ActiveRecord::Base
     end
     if user.food_count.to_i < 0
       user.update({alive: false})
-      messages.concat("You won't survive the apocalypse without enough food, you should BUY MORE FOOD!")
+      messages.concat("<strong>You won't survive the apocalypse without enough food, you should BUY MORE FOOD</strong>!")
     elsif user.water_count.to_i < 0
       user.update({alive: false})
-      messages.concat("You won't survive the apocalypse without enough water, you should BUY MORE WATER!")
+      messages.concat("<strong>You won't survive the apocalypse without enough water, you should BUY MORE WATER</strong>!")
     elsif user.medicine_count.to_i < 0
       user.update({alive: false})
-      messages.concat("You won't survive the apocalypse without enough medicine, you should BUY MORE MEDICAL SUPPLIES!")
+      messages.concat("<strong>You won't survive the apocalypse without enough medicine, you should BUY MORE MEDICAL SUPPLIES</strong>!")
     elsif user.protection_count.to_i < 0
       user.update({alive: false})
-      messages.concat("You won't survive the apocalypse without enough protection, you should BUY MORE RUBBER GLOVES!")
+      messages.concat("<strong>You won't survive the apocalypse without enough protection, you should BUY MORE RUBBER GLOVES</strong>!")
     end
     self.update({message: messages})
   end
@@ -171,7 +175,7 @@ class Disaster < ActiveRecord::Base
         break
       elsif value == 1
         user.update({alive: false})
-        message.concat("You did not make it out of the crumbling building in time")
+        message.concat("<strong>You did not make it out of the crumbling building in time</strong>")
       elsif value == 2
         user.update({food_count: (user.food_count.to_i + 12)})
         message.concat("You have made it out alive with the food that you grabbed")
@@ -184,7 +188,7 @@ class Disaster < ActiveRecord::Base
         break
       elsif value == 1
         user.update({alive: false})
-        message.concat("You were attacked by an infected, you have caught the contagion")
+        message.concat("<strong>You were attacked by an infected, you have caught the contagion</strong>")
       elsif value == 2
         user.update({food_count: (user.food_count.to_i + 12)})
         message.concat("You have made it away in time with the food that you grabbed")
@@ -243,7 +247,11 @@ class Disaster < ActiveRecord::Base
     elsif roll < 45
       message.concat("The nearby hospital is on fire. Your not sure whether it was an accident.!")
     elsif roll < 50
+<<<<<<< HEAD
       message.concat("You see some graffiti: Bird Flue: At least it's not killer bees.!")
+=======
+      message.concat("You see some graffiti: 'Bird Flue: At least it's not killer bees'!")
+>>>>>>> 6b1476b48d3ffa10838f930e25b14f1d62d61697
     end
     if roll == 1
       message.concat("You find a cooler full of water and some canned food in the back of a crashed minivan.!")
