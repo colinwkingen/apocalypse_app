@@ -82,16 +82,16 @@ class Disaster < ActiveRecord::Base
     end
     if user.food_count.to_i < 0
       user.update({alive: false})
-      messages.concat("You won't survive the apocalypse without enough food, you should BUY MORE BEANS!")
+      messages.concat("You won't survive the apocalypse without enough food, you should BUY MORE FOOD!")
     elsif user.water_count.to_i < 0
       user.update({alive: false})
-      messages.concat("You won't survive the apocalypse without enough water, you should BUY MORE FRESCA!")
+      messages.concat("You won't survive the apocalypse without enough water, you should BUY MORE WATER!")
     elsif user.medicine_count.to_i < 0
       user.update({alive: false})
-      messages.concat("You won't survive the apocalypse without enough medicine, you should BUY MORE VICODIN!")
+      messages.concat("You won't survive the apocalypse without enough medicine, you should BUY MORE MEDICAL SUPPLIES!")
     elsif user.protection_count.to_i < 0
       user.update({alive: false})
-      messages.concat("You won't survive the apocalypse without enough protection, you should BUY MORE RUBBER GLOVES!")
+      messages.concat("You won't survive the apocalypse without enough protection, you should BUY MORE RUBBER PROTECTIVE GEAR!")
     else
       user.update({high_score: (user.high_score.to_i + 1)})
     end
