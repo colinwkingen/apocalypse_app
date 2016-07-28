@@ -20,9 +20,9 @@ class Disaster < ActiveRecord::Base
       if rand(20) < 2
         if self.hard_hat?(user) && self.name == 'Earthquake'
           user.update({alive: false})
-          messages.concat("You have met your end due to falling debri!")
+          messages.concat("You have met your end due to falling debris.!")
         else
-          messages.concat("You have come in contact with falling debri, wise choice to have a hard hat!")
+          messages.concat("You have come in contact with falling debris, wise choice to have a hard hat.!")
         end
       end
       if rand(5) == 3
@@ -186,14 +186,14 @@ class Disaster < ActiveRecord::Base
     elsif roll < 45
       message.concat("The nearby hospital is on fire. Your not sure whether it was an accident.!")
     elsif roll < 50
-      message.concat("You see some graffiti: 'Bird Flue: At least it's not killer bees!'!")
+      message.concat("You see some graffiti: Bird Flue: At least it's not killer bees.!")
     end
     if roll == 1
-      message.concat("You find a cooler full of water and some canned food in the back of a crashed minivan!!")
+      message.concat("You find a cooler full of water and some canned food in the back of a crashed minivan.!")
       user.update({water_count: (user.water_count.to_i + 20)})
       user.update({water_count: (user.food_count.to_i + 25)})
     elsif roll == 2
-      message.concat("You find a satchel full of first aid supplies and medicine in the alley behind the pharmacy!!")
+      message.concat("You find a satchel full of first aid supplies and medicine in the alley behind the pharmacy.!")
       user.update({water_count: (user.medicine_count.to_i + 20)})
       user.update({water_count: (user.protection_count.to_i + 25)})
     end
@@ -212,11 +212,11 @@ class Disaster < ActiveRecord::Base
       message.concat("You encounter a crazed man with severe burns who tells you to flee the city. At least if you stay here it probably won't get bombed a second time.!")
     end
     if roll == 1
-      message.concat("You find a cooler full of water and some canned food in the back of a crashed minivan!!")
+      message.concat("You find a cooler full of water and some canned food in the back of a crashed minivan.!")
       user.update({water_count: (user.water_count.to_i + 20)})
       user.update({water_count: (user.food_count.to_i + 25)})
     elsif roll == 2
-      message.concat("You find a satchel full of first aid supplies and medicine in the alley behind the pharmacy!!")
+      message.concat("You find a satchel full of first aid supplies and medicine in the alley behind the pharmacy.!")
       user.update({water_count: (user.medicine_count.to_i + 20)})
       user.update({water_count: (user.protection_count.to_i + 25)})
     end

@@ -1,4 +1,4 @@
-<h2> <%= @user.name %>, you are trying to survive in a <%= @disaster.name %></h2>
+<h2> <%= @user.name %>, you are trying to survive the <%= @disaster.name %> event.</h2>
 
 <h3> Day <%= @counter %> </h3>
 
@@ -9,7 +9,7 @@
 <% if @user.alive %>
   <label for="new_user">Play out a day:</label>
   <form name="new_user" action="/users/<%=@user.id%>/disasters/<%=@disaster.id%>/<%=@counter%>" method="post">
-    <button class="btn btn-primary" type="submit">Go!</button>
+    <button class="btn btn-primary btn-lg" type="submit">Go!</button>
   </form>
 <% end %>
 
@@ -28,7 +28,7 @@
     <ul class="list-group">
       <li class="list-group-item">Food Count: <%= @user.food_count %></li>
       <li class="list-group-item">Water Count: <%= @user.water_count %></li>
-      <li class="list-group-item">Mdicine Count: <%= @user.medicine_count %></li>
+      <li class="list-group-item">Medicine Count: <%= @user.medicine_count %></li>
       <li class="list-group-item">Protection Count: <%= @user.protection_count %></li>
     </ul>
   </div>
@@ -40,7 +40,7 @@
         <% end %>
       </ul>
     <% else %>
-      <h4>WARNING: You did not purchase any special items to help you survive the <%= @disaster.name %> Disaster</h4>
+      <h4>WARNING: You did not purchase any special items to help you survive the <%= @disaster.name %> event.</h4>
     <% end %>
   </div>
 </div>
