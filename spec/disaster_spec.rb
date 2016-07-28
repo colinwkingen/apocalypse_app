@@ -18,7 +18,7 @@ describe(Disaster) do
     6.times() do
       test_disaster.every_day(test_user)
     end
-    expect(test_user.high_score()).to(eq(60))
+    expect(test_user.high_score()).to(eq(6))
   end
   it "tests to see if a disaster will kill someone" do
     test_disaster = Disaster.create({name: 'Earthquake'})
