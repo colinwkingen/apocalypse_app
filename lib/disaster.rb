@@ -152,14 +152,10 @@ class Disaster < ActiveRecord::Base
   end
 
 
-  define_method(:choices_writer) do
+  define_method(:choices_writnter) do
     messages = nil
     if (self.name == "Earthquake") && (rand(10) > 8)
       messages = ["You have stumbled upon a  well stocked pantry, there is food, but the building is crumbling...what do you do?", ["Quickly stuff your backpack with as much as you can", "Grab a handful of items and make a run for it", "Flee in terror"]]
-    elsif (self.name == "Contagion") && (rand(10) > 8)
-      messages = ["You have stumbled upon a  well stocked emergency responce center, there is food, but you can hear people approaching...what do you do?", ["Quickly stuff your backpack with as much as you can", "Grab a handful of items and make a run for it", "Flee in terror"]]
-    elsif (self.name == "Nuclear") && (rand(10) > 8)
-      messages = ["You have noticed a turned over food truck outside of your shelter that will have supplies, but there is a light rain of fallout...what do you do?", ["Venture out to fill your backpack with as much as you can", "Grab a handful of items and quickly run back", "Stay put in safety"]]
     end
     messages
   end
@@ -178,33 +174,6 @@ class Disaster < ActiveRecord::Base
       elsif value == 3
         user.update({medicine_count: (user.medicine_count.to_i - 6)})
         message.concat("You made it out alive, but in your panic, you twisted your ankle requiring you to expend valuable medicine")
-      end
-    elsif (self.name == "Contagion")
-      if value == 0
-        break
-      elsif value == 1
-        user.update({alive: false})
-        message.concat("You were attacked by an infected, you have caught the contagion")
-      elsif value == 2
-        user.update({food_count: (user.food_count.to_i + 12)})
-        message.concat("You have made it away in time with the food that you grabbed")
-      elsif value == 3
-        user.update({medicine_count: (user.medicine_count.to_i - 6)})
-        message.concat("You made it away in time, but in your panic, you twisted your ankle requiring you to expend valuable medicine")
-      end
-    elsif (self.name == "Nuclear")
-      if value == 0
-        break
-      elsif value == 1
-        user.update({medicine_count: (user.medicine_count.to_i - 6)})
-        user.update({food_count: (user.food_count.to_i + 20)})
-        message.concat("You gathered a lot of food supplies, but you have started to feel ill from the radioactivity requiring you to use some of your medicine")
-      elsif value == 2
-        user.update({food_count: (user.food_count.to_i + 12)})
-        message.concat("You have made it back in time with the food that you grabbed")
-      elsif value == 3
-        user.update({medicine_count: (user.medicine_count.to_i - 6)})
-        message.concat("You are fine but missed a chance to gather supplies")
       end
     end
   end
