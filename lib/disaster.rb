@@ -91,9 +91,7 @@ class Disaster < ActiveRecord::Base
       messages.concat("You won't survive the apocalypse without enough medicine, you should BUY MORE MEDICAL SUPPLIES!")
     elsif user.protection_count.to_i < 0
       user.update({alive: false})
-      messages.concat("You won't survive the apocalypse without enough protection, you should BUY MORE RUBBER PROTECTIVE GEAR!")
-    else
-      user.update({high_score: (user.high_score.to_i + 1)})
+      messages.concat("You won't survive the apocalypse without enough protection, you should BUY MORE RUBBER GLOVES!")
     end
     self.update({message: messages})
   end
@@ -153,6 +151,33 @@ class Disaster < ActiveRecord::Base
     chance_of_debri
   end
 
+
+  define_method(:choices_writter) do
+    messages = nil
+    if (self.name == "Earthquake") && (rand(10) > 8)
+      messages = ["You have stumbled upon a  well stocked pantry, there is food, but the building is crumbling...what do you do?", ["Quickly stuff your backpack with as much as you can", "Grab a handful of items and make a run for it", "Flee in terror"]]
+    end
+    messages
+  end
+
+  define_method(:choices_reader) do |user, value|
+    message = ''
+    if (self.name == "Earthquake")
+      if value == 0
+        break
+      elsif value == 1
+        user.update({alive: false})
+        message.concat("You did not make it out of the crumbling building in time")
+      elsif value == 2
+        user.update({food_count: (user.food_count.to_i + 12)})
+        message.concat("You have made it out alive with the food that you grabbed")
+      elsif value == 3
+        user.update({medicine_count: (user.medicine_count.to_i - 6)})
+        message.concat("You made it out alive, but in your panic, you twisted your ankle requiring you to expend valuable medicine")
+      end
+    end
+  end
+
   define_method(:rare_event_earthquake) do |user|
     message = ''
     roll = rand(50)
@@ -176,6 +201,7 @@ class Disaster < ActiveRecord::Base
     end
     message
   end
+
   define_method(:rare_event_contagion) do |user|
     message = ''
     roll = rand(50)
@@ -199,6 +225,7 @@ class Disaster < ActiveRecord::Base
     end
     message
   end
+
   define_method(:rare_event_nuclear) do |user|
     message = ''
     roll = rand(50)

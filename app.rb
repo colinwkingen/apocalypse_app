@@ -118,11 +118,22 @@ post('/users/:user_id/disasters/:disaster_id/:counter_id') do
   @user = User.find(params['user_id'])
   @disaster = Disaster.find(params['disaster_id'])
   @counter = params['counter_id'].to_i
-  # binding.pry
+  value = params['choice_radio'].to_i
+  if @user.high_score.to_i < (@counter + 1)
+    @user.update({high_score: (@counter + 1)})
+  end
+binding.pry
   if @user.alive == true
+    if radios = @disaster.choices_writter
+      @scenario = radios[0]
+      @multiple_choice = radios[1]
+    end
     @disaster.every_day(@user)
     @counter += 1
     @message_arry = @disaster.message.split('!')
+    if value > 0
+      @message_arry.push(@disaster.choices_reader(@user, value))
+    end
   else
     @message_arry = @disaster.message.split('!')
   end
