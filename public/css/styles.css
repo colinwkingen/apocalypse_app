@@ -70,7 +70,14 @@ a:hover {
 .btn-danger:active, .btn-danger.active {
     background: #5A2E2E;
     box-shadow: none;
+}
 
+.btn-success {
+  background-color: #1D2F00;
+}
+
+.btn-success:hover {
+  background-color: #4DFE15;
 }
 
 ul {

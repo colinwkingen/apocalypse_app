@@ -20,11 +20,7 @@ class Disaster < ActiveRecord::Base
       if rand(20) < 2
         if self.hard_hat?(user) && self.name == 'Earthquake'
           user.update({alive: false})
-<<<<<<< HEAD
-          messages.concat("You have met your end due to falling debris.!")
-=======
           messages.concat("<strong>You have met your end due to falling debri</strong>!")
->>>>>>> 6b1476b48d3ffa10838f930e25b14f1d62d61697
         else
           messages.concat("You have come in contact with falling debris, wise choice to have a hard hat.!")
         end
@@ -247,11 +243,7 @@ class Disaster < ActiveRecord::Base
     elsif roll < 45
       message.concat("The nearby hospital is on fire. Your not sure whether it was an accident.!")
     elsif roll < 50
-<<<<<<< HEAD
-      message.concat("You see some graffiti: Bird Flue: At least it's not killer bees.!")
-=======
       message.concat("You see some graffiti: 'Bird Flue: At least it's not killer bees'!")
->>>>>>> 6b1476b48d3ffa10838f930e25b14f1d62d61697
     end
     if roll == 1
       message.concat("You find a cooler full of water and some canned food in the back of a crashed minivan.!")
