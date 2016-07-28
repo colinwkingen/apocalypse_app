@@ -104,7 +104,9 @@ get('/users/:user_id/disasters/:disaster_id') do
   @disaster = Disaster.find(params['disaster_id'])
   @counter = 0
   @user.alive = true
-  @high_score = @user.high_score
+  if @user.high_score.to_i > 0
+    @high_score = @user.high_score
+  end
   @user.compile_resources
   @special_items = []
   @user.resources.each do |resource|
