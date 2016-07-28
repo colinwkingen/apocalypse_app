@@ -24,7 +24,7 @@
         <h3><%= @scenario %></h3>
         <ul class=" list-group">
           <% @multiple_choice.each_with_index() do |option, index| %>
-            <li class="list-group-item">
+            <li class="disasterBckgrnd list-group-item">
               <div class="radio">
                 <label><input type="radio" name="choice_radio" value="<%= index + 1 %>" required><%= option %></label>
               </div>
@@ -59,9 +59,10 @@
   </div>
   <div class="col-xs-5">
     <% if @special_items.length != 0 %>
+      <h4>Special items:</h4>
       <ul class="list-group">
         <% @special_items.each do |item| %>
-          <li class="list-group-item"><%= item.name %></li>
+          <li class="disasterBckgrnd list-group-item"><%= item.name %></li>
         <% end %>
       </ul>
     <% else %>
@@ -74,4 +75,4 @@
 
 <hr>
 
-<a class = "btn btn-primary" href="/users/<%=@user.id%>">Back to Store</a>
+<a class = "btn btn-success" href="/users/<%=@user.id%>">Back to Store</a>
