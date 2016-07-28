@@ -92,8 +92,10 @@ end
 post('/users/:user_id/resources/:resource_id') do
   item = Resource.find(params['resource_id'])
   user = User.find(params['user_id'])
-  new_amount = Amount.create({:user_id => user.id, :resource_id => item.id, :quantity => 1})
-  user.update({:money => (user.money - item.cost)})
+  if user.money > item.cost
+    new_amount = Amount.create({:user_id => user.id, :resource_id => item.id, :quantity => 1})
+    user.update({:money => (user.money - item.cost)})
+  end
   redirect('/users/' + user.id.to_s)
 end
 
