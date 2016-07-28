@@ -92,8 +92,10 @@ end
 post('/users/:user_id/resources/:resource_id') do
   item = Resource.find(params['resource_id'])
   user = User.find(params['user_id'])
-  new_amount = Amount.create({:user_id => user.id, :resource_id => item.id, :quantity => 1})
-  user.update({:money => (user.money - item.cost)})
+  if user.money > item.cost
+    new_amount = Amount.create({:user_id => user.id, :resource_id => item.id, :quantity => 1})
+    user.update({:money => (user.money - item.cost)})
+  end
   redirect('/users/' + user.id.to_s)
 end
 
@@ -101,6 +103,7 @@ get('/users/:user_id/disasters/:disaster_id') do
   @user = User.find(params['user_id'])
   @disaster = Disaster.find(params['disaster_id'])
   @counter = 0
+  @this_high_score = @user.high_score
   @user.alive = true
   @user.compile_resources
   @special_items = []
@@ -117,9 +120,9 @@ post('/users/:user_id/disasters/:disaster_id/:counter_id') do
   @disaster = Disaster.find(params['disaster_id'])
   @counter = params['counter_id'].to_i
   value = params['choice_radio'].to_i
-  if @user.high_score.to_i < (@counter + 1)
-    @user.update({high_score: (@counter + 1)})
-  end
+  # if @user.high_score.to_i < (@counter + 1)
+  #   @user.update({high_score: (@counter + 1)})
+  # end
   if @user.alive == true
     if (radios = @disaster.choices_writer) && @user.event_flag
       @scenario = radios[0]
@@ -132,6 +135,9 @@ post('/users/:user_id/disasters/:disaster_id/:counter_id') do
       @message_arry.push(@disaster.choices_reader(@user, value))
     end
   else
+    if @user.high_score.to_i < (@counter + 1)
+      @user.update({high_score: (@counter + 1)})
+    end
     @message_arry = @disaster.message.split('!')
   end
   @special_items = []
