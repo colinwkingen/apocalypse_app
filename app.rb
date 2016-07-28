@@ -100,7 +100,7 @@ end
 get('/users/:user_id/disasters/:disaster_id') do
   @user = User.find(params['user_id'])
   @disaster = Disaster.find(params['disaster_id'])
-  @counter = 0
+  @counter = 1
   @user.alive = true
   @user.compile_resources
   @special_items = []
@@ -119,7 +119,7 @@ post('/users/:user_id/disasters/:disaster_id/:counter_id') do
   # binding.pry
   if @user.alive == true
     @disaster.every_day(@user)
-    @counter += 1
+    @counter += 0
     @message_arry = @disaster.message.split('!')
   else
     @message_arry = @disaster.message.split('!')
