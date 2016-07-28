@@ -166,6 +166,7 @@ class Disaster < ActiveRecord::Base
 
   define_method(:choices_reader) do |user, value|
     message = ''
+    user.update({event_flag: false})
     if (self.name == "Earthquake")
       if value == 0
         break
