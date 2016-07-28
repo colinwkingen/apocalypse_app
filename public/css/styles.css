@@ -93,3 +93,11 @@ ul {
 .disasterBckgrnd {
   background-color: #2A2C31;
 }
+
+.btn-success {
+  background-color: #1D2F00;
+}
+
+.btn-success:hover {
+  background-color: #4DFE15;
+}
