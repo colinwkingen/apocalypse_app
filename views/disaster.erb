@@ -10,6 +10,22 @@
   <label for="new_user">Play out a day:</label>
   <form name="new_user" action="/users/<%=@user.id%>/disasters/<%=@disaster.id%>/<%=@counter%>" method="post">
     <button class="btn btn-primary" type="submit">Go!</button>
+    <% if @multiple_choice %>
+    <div class="row">
+      <div class="col-xs-6 col-xs-offset-3">
+        <h3><%= @scenario %></h3>
+        <ul class="list-group">
+          <% @multiple_choice.each_with_index() do |option, index| %>
+            <li class="list-group-item">
+              <div class="radio">
+                <label><input type="radio" name="choice_radio" value="<%= index + 1 %>" required><%= option %></label>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+    <% end %>
   </form>
 <% end %>
 
@@ -43,6 +59,8 @@
       <h4>WARNING: You did not purchase any special items to help you survive the <%= @disaster.name %> Disaster</h4>
     <% end %>
   </div>
+
+
 </div>
 
 <hr>
