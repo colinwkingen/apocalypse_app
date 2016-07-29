@@ -101,3 +101,8 @@ ul {
 .btn-success:hover {
   background-color: #4DFE15;
 }
+
+.item_delete {
+  margin-top: 1.5em;
+  margin-bottom: 1.1em;
+}

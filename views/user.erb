@@ -77,7 +77,7 @@
                 <div>
                   <form class="" action="/users/<%= @user.id %>/resources/<%= item.id %>/remove" method="post">
                     <input name="_method" type="hidden" value="patch">
-                    <button class="btn btn-danger btn-sm" type="submit">Delete</button>
+                    <button class="item_delete btn btn-danger" type="submit">Delete</button>
                   </form>
                 </div>
               <% end %>
