@@ -245,7 +245,7 @@ class Disaster < ActiveRecord::Base
     elsif roll < 45
       message.concat("The nearby hospital is on fire. Your not sure whether it was an accident.!")
     elsif roll < 50
-      message.concat("You see some graffiti: Bird Flue: At least it's not killer bees.!")
+      message.concat("You see some graffiti: Bird Flu: At least it's not killer bees.!")
     end
     if roll == 1
       message.concat("You find a cooler full of water and some canned food in the back of a crashed minivan.!")
