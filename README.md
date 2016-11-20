@@ -28,10 +28,18 @@ a fun game. It completes the following user stories developed before coding:
 
 To install this repository into a new project each time, first
 
-* Clone the github repository using the git clone command from /Desktop
-* install postgres gem
-* Create a new folder in the Desktop with your project name
-* Use ActiveRecord to install databases with rake
+* `git clone <repository-url>` this repository
+* Change into the new directory
+* Install postgres gem
+* Use ActiveRecord to install databases with rake:
+* `rake db:create`
+* `rake db:migrate`
+* `rake db:seed`
+* Start the Sinatra Server:
+* `ruby app.rb`
+
+
+
 
 ## Known Bugs
 
